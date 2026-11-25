@@ -1,524 +1,345 @@
-# Contributing / 参与贡献
+**Tiếng Việt** · [中文 / English gốc](CONTRIBUTING.zh.md)
 
-Thanks for helping improve `dsh-wallpaper-engine`. Please keep each pull request focused on one clear problem and include the platform and verification results in its description.
+# Hướng dẫn đóng góp
 
-感谢你参与改进 `dsh-wallpaper-engine`。请让每个 Pull Request 聚焦一个明确问题，并在说明中写清适用平台和验证结果。
+Cảm ơn bạn đã tham gia cải thiện `dsh-wallpaper-engine`. Vui lòng giữ mỗi Pull Request tập trung vào một vấn đề rõ ràng, đồng thời ghi rõ nền tảng áp dụng và kết quả kiểm chứng trong phần mô tả.
 
-> Issue triage and claim approval / 问题分诊、认领申请与审批：见下文「Approval before opening a PR」与「Issue triage & labels」两节。
+> Về phân loại issue, xin nhận việc (claim) và phê duyệt: xem hai mục **Phê duyệt nhận issue trước khi mở PR** và **Phân loại issue & nhãn** bên dưới.
 
-## PR titles: plain language, professional body / PR 标题讲人话，正文专业
+## Tiêu đề PR: viết dễ hiểu như ngôn ngữ tự nhiên, nội dung chuyên môn đặt ở phần thân
 
-**This rule applies to everyone — human contributors and AI assistants alike.** The PR title is the first thing a reviewer sees. Write it so someone who does not know this code can tell **what changed, where, and what problem it solves**. Implementation details, terminology and test notes belong in the PR **body**, not the title. Background and the full rationale: [#323](https://github.com/elysia395/dsh-wallpaper-engine/issues/323) — the issue stays open on purpose, as a human-facing reminder.
+**Quy tắc này áp dụng cho tất cả mọi người — cả người đóng góp lẫn trợ lý AI.** Tiêu đề PR là thông tin đầu tiên người duyệt nhìn thấy. Hãy viết sao cho một người chưa quen đoạn mã này vẫn biết được **sửa ở đâu, làm gì và giải quyết vấn đề gì**. Chi tiết triển khai, thuật ngữ kỹ thuật và ghi chú kiểm thử thuộc về **phần thân** PR, không nhồi vào tiêu đề. Xem bối cảnh, lý do đầy đủ và các ví dụ đúng/sai tại [#323](https://github.com/elysia395/dsh-wallpaper-engine/issues/323) — issue này được giữ ở trạng thái open có chủ đích để làm lời nhắc trực quan cho người đóng góp.
 
-- Recommended shape: `type: scope/feature — what changed, what problem it solves` (types such as 修复 / 新增 / 优化 / 重构).
-- Bad: `refactor: optimize data flow abstraction`, `chore: enhance maintainability`, or any title that only says “优化性能 / 提升体验 / 增强稳定性 / 改进代码质量”.
-- Use concrete words instead of AI-flavoured abstraction, and avoid abbreviations the reader has to decode.
+- Cấu trúc khuyến nghị: `loại: phạm vi/tính năng — đã làm gì, giải quyết vấn đề gì` (loại như `sửa lỗi` / `thêm mới` / `tối ưu` / `tái cấu trúc`, hoặc `fix` / `feat` / `perf` / `refactor`).
+- Không dùng tiêu đề chung chung, không nêu rõ phạm vi như `refactor: optimize data flow abstraction`, `chore: enhance maintainability`, hay các cụm sáo rỗng kiểu “tối ưu hiệu năng / nâng cao trải nghiệm / tăng độ ổn định / cải thiện chất lượng mã”.
+- Dùng từ ngữ cụ thể thay cho các cụm trừu tượng đậm chất AI, và tránh dùng chữ viết tắt khiến người đọc phải tự giải mã.
+- Tóm lại: **“Phần thân PR có thể chuyên sâu, nhưng tiêu đề PR phải nói rõ ràng, dễ hiểu.”**
 
-| Don't | Do |
+| Không nên | Nên |
 | --- | --- |
-| `refactor: optimize data flow abstraction` | `重构：把订单数据同步逻辑拆成独立模块，方便以后改` |
-| `feat: implement idempotent retry mechanism` | `新增：提交失败后自动重试，避免重复创建订单` |
-| `perf: improve rendering pipeline` | `优化：减少列表页重复渲染，滚动更流畅` |
-| `chore: enhance maintainability` | `整理：拆分工具函数，降低后续修改难度` |
+| `refactor: optimize data flow abstraction` | `tái cấu trúc: tách logic đồng bộ dữ liệu đơn hàng thành module riêng để sau này dễ sửa` |
+| `feat: implement idempotent retry mechanism` | `thêm mới: tự động thử lại khi gửi thất bại, tránh tạo trùng đơn hàng` |
+| `perf: improve rendering pipeline` | `tối ưu: giảm render lại trang danh sách giúp cuộn mượt hơn` |
+| `chore: enhance maintainability` | `dọn dẹp: tách các hàm tiện ích để giảm độ phức tạp khi sửa về sau` |
 
-**AI assistants:** before you run `gh pr create` or open a PR, rewrite the title to satisfy this rule. Do not pass a tool-generated, commit-message or plan-style title through unchanged; if depth is needed, put it in the body and keep the title a plain-language summary.
+**Lưu ý cho trợ lý AI:** trước khi chạy `gh pr create` hoặc mở PR, bắt buộc viết lại tiêu đề theo đúng quy tắc này. Không giữ nguyên tiêu đề do công cụ tự sinh, tiêu đề kiểu commit message hay tiêu đề kiểu bản kế hoạch; nếu cần giải thích sâu về kỹ thuật, hãy đưa vào phần thân và giữ tiêu đề là bản tóm tắt bằng ngôn ngữ đời thường.
 
-**PR 标题是第一眼信息。** 请让不熟悉这段代码的人也能从标题看出**改哪里、做了什么、解决什么问题**；实现方案、术语和测试说明写进 PR **正文**，不要塞进标题。规则同样适用于 AI 助手：自动生成 PR 时，若标题只有“优化架构 / 提升可维护性 / 重构抽象层”这类空泛说法，必须先改成人话再提交。（完整说明与正反例见 [#323](https://github.com/elysia395/dsh-wallpaper-engine/issues/323)；该 issue 保持 open，作为给真人用户的视觉提示。）
+Tự kiểm tra trước khi gửi: người chưa đọc mã nguồn này có thể hiểu đại khái lần thay đổi này làm gì không? Tiêu đề đã nêu rõ module, tính năng hoặc ngữ cảnh người dùng cụ thể chưa? Mọi chi tiết kỹ thuật đã được đưa vào phần thân chưa?
 
-- 推荐结构：`类型：范围/功能，做了什么，解决什么问题`（类型如 修复 / 新增 / 优化 / 重构）。
-- 不要只写没有具体范围的空泛结果（“优化性能”“提升体验”“增强稳定性”“改进代码质量”），也不要堆缩写和 AI 黑话。
-- 标题说人话，正文可以专业：**「PR 正文可以专业，PR 标题必须说人话。」**
+## Phê duyệt nhận issue trước khi mở PR
 
-提交前自查：不懂这段代码的人能不能大致看懂这次改了什么？标题有没有写清具体模块、功能或用户场景？技术细节是不是都放进了正文？
+**Người đóng góp bên ngoài bắt buộc phải xin nhận một issue, được người duy trì (maintainer) phê duyệt và gán làm assignee trước khi tạo PR. Không cho phép mở PR trực tiếp, kể cả draft PR.** Chỉ chủ kho lưu trữ (owner) và các cộng tác viên được GitHub API xác nhận theo thời gian thực có quyền `write`, `maintain` hoặc `admin` mới được miễn cổng kiểm tra nhận issue này. Quyền được kiểm tra trực tiếp ở mỗi lần đánh giá; huy hiệu `contributor`, `author_association`, lịch sử đóng góp trước đây hay quyền `read` / `triage` đều không được miễn. Không có nhãn `claim:exempt` hay ngoại lệ dựa trên nhãn nào khác. Việc miễn cổng nhận issue cũng không miễn các bước CI kiểm tra mã nguồn.
 
-## Approval before opening a PR / 先批准认领，再开 PR
+- **Quy trình nhận issue từng bước**:
+  - Chờ maintainer chấp nhận một issue đang mở bằng nhãn `status:accepted` và gỡ bỏ `status:needs-triage` / `status:declined`.
+  - Chính bạn bình luận `/assign` trong issue đó: đây chỉ là lời đề nghị, **không tự động gán ngay lập tức**.
+  - Chờ maintainer bình luận `/approve @login` ngay trong issue đó và để bot thực hiện gán (assign) cho bạn.
+  - Maintainer cũng có thể gán bạn thủ công qua giao diện GitHub UI, nhưng chỉ hợp lệ khi trước đó đã có bình luận `/assign` hợp lệ của chính bạn trong cùng issue.
+  - Việc issue được chấp nhận (`status:accepted`) không đồng nghĩa với việc yêu cầu nhận issue đã được duyệt.
+- **Hủy yêu cầu hoặc trả lại issue**:
+  - Chính bạn bình luận `/unassign` để hủy yêu cầu đang chờ duyệt hoặc trả lại issue đang nhận.
+  - Maintainer có thể dùng `/unassign @login` để hủy/gỡ gán cho người cụ thể, hoặc dùng `/unassign` không kèm tham số để gỡ toàn bộ assignee hiện tại.
+- **Dòng liên kết issue trong phần thân PR**:
+  - Đặt ít nhất một dòng đứng riêng `Fixes #123` hoặc `Refs #123` trong phần thân PR, mỗi issue một dòng; hỗ trợ nhiều dòng.
+  - Cũng chấp nhận URL đầy đủ tới issue trong cùng kho lưu trữ (ví dụ `Fixes https://github.com/elysia395/dsh-wallpaper-engine/issues/123`) hoặc tham chiếu kèm tên kho (`Refs elysia395/dsh-wallpaper-engine#123`).
+  - Viết `#123` đứng trơ, viết chung trong dòng như `Issue: Fixes #123`, dẫn sang kho khác, ghi ở tiêu đề PR hoặc bình luận PR đều không đạt yêu cầu.
+- **Điều kiện mỗi issue được tham chiếu phải đáp ứng**:
+  - Mỗi issue được tham chiếu hiện phải đang mở (open), có nhãn `status:accepted`, không có `status:needs-triage` hay `status:declined`, và tác giả PR đang nằm trong danh sách assignee.
+  - Thời điểm chấp nhận đáng tin cậy, thời điểm bạn gửi `/assign`, thời điểm maintainer phê duyệt và thời điểm gán thực tế đều phải diễn ra **nghiêm ngặt trước** `PR.created_at`, trong đó yêu cầu `/assign` phải có trước bước phê duyệt/gán.
+  - Cổng kiểm tra xác minh dựa trên bằng chứng bình luận/dòng thời gian (timeline) của GitHub, không chỉ nhìn nhãn hiện tại hay lời tự khai quyền hạn.
+  - Việc chấp nhận, xin nhận hay phê duyệt bổ sung sau khi đã tạo PR không thể làm PR cũ trở nên hợp lệ; chỉnh sửa PR, chuyển từ draft sang ready hay mở lại (reopen) đều không đặt lại thời điểm tạo PR. Hãy hoàn tất quy trình rồi mở một PR mới.
+- **Cổng kiểm tra tin cậy thực hiện những gì**:
+  - Workflow tin cậy chạy bằng `pull_request_target` sẽ giải thích lý do và tự động đóng các PR được xác nhận không hợp lệ (bao gồm cả draft và PR được mở lại), đồng thời đánh trạng thái `failure` cho Check Run mang tên cố định `issue-claim-policy` trên head SHA của PR.
+  - Các PR hợp lệ hoặc được miễn theo quyền trực tiếp sẽ vượt qua kiểm tra này.
+  - Nếu lỗi API khiến không thể truy xuất đáng tin cậy quyền hạn hoặc lịch sử, hệ thống sẽ đánh trượt kiểm tra mà **không** tự động đóng PR; còn khi đã lấy đủ lịch sử và xác nhận không có phê duyệt trước đó thì đó là vi phạm chính sách, không phải lỗi API.
+  - Workflow tin cậy tuyệt đối không được checkout hoặc thực thi mã nguồn từ nhánh head của PR với quyền ghi (write).
+- **Kiểm tra lại (revalidation)**: mọi thay đổi về trạng thái đóng/mở của issue, nhãn chấp nhận hoặc danh sách assignee sẽ kích hoạt kiểm tra lại toàn bộ các PR đang mở có liên kết. Hành động `/approve` và `/unassign` của bot phải chủ động làm mới các PR liên kết ngay trong cùng lần chạy thay vì trông chờ sự kiện do bot phát ra tự kích hoạt một workflow khác.
+- **Cam kết triển khai (deployment contract)**:
+  - Trên đây là đặc tả tự động hóa bắt buộc phải thực thi, không đồng nghĩa việc sửa tài liệu là đã triển khai xong.
+  - Các workflow phê duyệt và cổng kiểm tra PR phải được hợp nhất vào nhánh mặc định `main` trước khi có hiệu lực; maintainer phải giữ nguyên các Required checks hiện có và bổ sung thêm `issue-claim-policy`, không thay thế hay đổi tên các check CI mã nguồn ở bước này.
+  - Điều kiện gộp (merge) là **CI mã nguồn hiện có + `issue-claim-policy`**. GitHub không thể chặn truy cập vào trang tạo PR từ trước, nên cơ chế thực thi là tự động đóng sau khi tạo kèm kiểm tra bắt buộc để chặn merge.
 
-**External contributors must request an issue and receive maintainer approval before creating a PR. Direct PRs, including drafts, are not allowed.** Only the repository owner and collaborators whose current GitHub API permission is `write`, `maintain` or `admin` are exempt from this issue-claim gate. Permissions are checked live on every evaluation; a `contributor` badge, `author_association`, past contributions, or `read` / `triage` access is not an exemption. There is no `claim:exempt` or other label-based exemption. This exemption does not bypass code CI.
+## Phân loại issue & nhãn
 
-- **Claim, step by step**:
-  - Wait for a maintainer to accept an open issue with `status:accepted` and remove `status:needs-triage` / `status:declined`.
-  - Comment `/assign` on that issue yourself: this is a request, **not immediate assignment**.
-  - Wait for a maintainer to comment `/approve @login` on the same issue and for the bot to assign you.
-  - A maintainer may instead assign you through GitHub UI, but only with your prior valid `/assign` record in that issue.
-  - Acceptance alone is not claim approval.
-- **Unassigning**:
-  - Your own `/unassign` cancels a pending request or releases your claim.
-  - Maintainers may use `/unassign @login` to cancel/release for that person, or `/unassign` without arguments to release all current assignees.
-- **Issue line in the PR body**:
-  - Put at least one standalone `Fixes #123` or `Refs #123` line in the PR body, one issue per line; multiple lines are supported.
-  - Full same-repository issue URLs (for example `Fixes https://github.com/elysia395/dsh-wallpaper-engine/issues/123`) and qualified references (`Refs elysia395/dsh-wallpaper-engine#123`) are also accepted.
-  - Bare `#123`, inline text such as `Issue: Fixes #123`, other repositories, titles and PR comments do not satisfy this requirement.
-- **What each referenced issue must satisfy**:
-  - Every referenced issue must currently be open, have `status:accepted`, have neither `status:needs-triage` nor `status:declined`, and list the PR author as an assignee.
-  - Trusted acceptance, your request, maintainer approval and actual assignment must all be strictly earlier than `PR.created_at`, with the request preceding approval/assignment.
-  - The gate verifies GitHub comment/timeline evidence, not just current labels or self-reported permission.
-  - Late acceptance, claiming or approval cannot qualify the original PR; editing it, marking it ready or reopening it does not reset creation time. Complete the process, then open a new PR.
-- **What the trusted gate does**:
-  - The trusted `pull_request_target` gate must explain and close confirmed noncompliant PRs, including drafts and reopened PRs, and fail the fixed-name `issue-claim-policy` Check Run on the PR's head SHA.
-  - Compliant or permission-exempt PRs pass that check.
-  - API failures that prevent reliable permission or history retrieval fail the check without automatically closing the PR; a complete history confirming no prior approval is a policy violation, not an API error.
-  - The trusted workflow must not check out or execute PR head code with write privileges.
-- **Revalidation**: issue state, acceptance-label or assignment changes revalidate all linked open PRs. Bot `/approve` and `/unassign` actions must explicitly refresh linked PRs in the same run instead of relying on bot-generated events to trigger another workflow.
-- **Deployment contract**:
-  - This is the required automation contract, not a claim that documentation deploys it.
-  - The approval and PR-gate workflows must land on default branch `main`; maintainers must preserve the existing Required checks and append `issue-claim-policy`, without replacing or migrating code CI check names here.
-  - Merge requires **existing code CI + `issue-claim-policy`**. GitHub cannot prevent access to the PR creation page, so enforcement is post-creation closure plus a required check.
+Cổng kiểm tra nhận issue ở mục trên là cam kết thực thi tự động; mục này quy định cách phân loại và gắn nhãn. Việc cưỡng chế nằm trong `.github/workflows/issue-claim*.yml` — chỉnh sửa văn bản ở đây không làm thay đổi cổng kiểm tra.
 
-**外部贡献者必须先在 issue 申请，获得维护者批准并成为 assignee，才能创建 PR；不能直接开 PR，draft 也不例外。** 只有仓库 owner，以及 GitHub API 实时确认具有 `write` / `maintain` / `admin` 权限的协作者，豁免这一 issue 认领门禁。每次校验都实时查权限；`contributor` 徽章、`author_association`、历史贡献或 `read` / `triage` 权限不算豁免。不设 `claim:exempt` 或其他标签例外，认领豁免也不豁免代码 CI。
-
-- **认领步骤**：
-  - 等维护者在 open issue 添加 `status:accepted`，并移除 `status:needs-triage` / `status:declined`。
-  - 本人在该 issue 评论 `/assign`，这只是申请，**不会立刻分配**。
-  - 等维护者在同一 issue 评论 `/approve @login` 并由机器人完成指派。
-  - 也可由维护者通过 GitHub UI 手动指派，但同一 issue 必须已有本人事前的有效 `/assign` 记录。
-  - 受理不等于批准认领。
-- **取消或释放**：
-  - 本人 `/unassign` 取消待批申请或释放自己的认领。
-  - 维护者可 `/unassign @login` 取消指定申请或释放指定认领，无参 `/unassign` 则释放当前所有 assignee。
-- **PR 正文里的 issue 行**：
-  - 至少填写一条独立行 `Fixes #123` 或 `Refs #123`，每个 issue 一行，支持多条。
-  - 也支持同仓库完整 issues URL（如 `Fixes https://github.com/elysia395/dsh-wallpaper-engine/issues/123`）或限定仓库引用（如 `Refs elysia395/dsh-wallpaper-engine#123`）。
-  - 裸 `#123`、`关联 issue：Fixes #123` 这样的行内文字、其他仓库引用、标题或 PR 评论都不算。
-- **每个关联 issue 必须满足**：
-  - 当前必须 open、带 `status:accepted`、无 `status:needs-triage` / `status:declined`，且 PR 作者是 assignee。
-  - 可信受理、本人申请、维护者批准及实际分配必须全部严格早于 `PR.created_at`，申请须先于审批/分配。
-  - 校验依 GitHub 评论与时间线证据，不只看当前标签或正文自报的授权。
-  - 事后补受理、认领或审批不能让原 PR 合格；编辑、转为 ready 或重新打开都不重置创建时间。补齐流程后需重新创建 PR。
-- **可信门禁做什么**：
-  - 须对已确认不合规的 PR 自动解释并关闭，包括 draft 和 reopened，并在 PR 的 head SHA 写入固定名 `issue-claim-policy` Check Run `failure`；合规或实时权限豁免时该检查通过。
-  - API 故障导致无法可靠取得权限或历史数据时仅判失败，不自动误关；完整历史确认没有事前批准的，仍是违规，不是 API 故障。
-  - 可信工作流不能带写权限检出或执行 PR head 代码。
-- **重验**：issue 开闭、受理相关标签或分配变化时，重验所有关联开放 PR；机器人 `/approve` / `/unassign` 必须在当前运行中主动刷新，不能依赖机器人产生的事件再触发工作流。
-- **部署契约**：
-  - 上述是必须落实的自动化契约，不代表修改文档就已部署。
-  - 审批及 PR 门禁工作流必须先合入默认分支 `main`；维护者须保留现有 Required checks 并追加 `issue-claim-policy`，不在此流程中替换或迁移代码 CI 检查名。
-  - 合并要求为**现有代码 CI + `issue-claim-policy`**。GitHub 无法预先禁用 PR 创建页，因此采用创建后自动关闭与必过检查阻断合并。
-
-## Issue triage & labels / Issue 分诊与标签
-
-The claim gate above is the executable contract; this section keeps the triage/label bookkeeping. Enforcement lives in `.github/workflows/issue-claim*.yml` — changing this prose does not deploy the gate.
-
-| Label | Meaning | Who sets it |
+| Nhãn | Ý nghĩa | Ai gắn |
 |---|---|---|
-| `status:needs-triage` | New issue, not looked at yet — the initial state (template adds it) | template |
-| `status:accepted` | Maintainer confirmed it is worth doing; **claims start here** | maintainer |
-| `status:declined` | Won't do / out of scope (with a one-line reason) | maintainer |
-| `area:client` | Browser half (`src/**`, rendering / panels / glass) | anyone |
-| `area:host` | Host half (`lib/**`: routes, scan, media pipeline, config) | anyone |
-| `area:glass-ui` | Liquid glass / appearance / fonts / mascot | anyone |
-| `area:webwallgl` | Scene / web wallpaper renderer and media bridge | anyone |
-| `area:ci-docs` | CI, guards, docs, release chain | anyone |
+| `status:needs-triage` | Issue mới, chưa được xem xét — trạng thái khởi tạo (do mẫu issue tự thêm) | mẫu issue (template) |
+| `status:accepted` | Maintainer xác nhận đáng làm; **bắt đầu có thể xin nhận từ đây** | maintainer |
+| `status:declined` | Không làm / nằm ngoài phạm vi (kèm lý do ngắn gọn một dòng) | maintainer |
+| `area:client` | Phần trình duyệt (`src/**`, hiển thị / bảng điều khiển / hiệu ứng kính) | bất kỳ ai |
+| `area:host` | Phần máy chủ (`lib/**`: định tuyến, quét thư mục, luồng xử lý media, cấu hình) | bất kỳ ai |
+| `area:glass-ui` | Hiệu ứng kính lỏng (liquid glass) / giao diện / phông chữ / linh vật | bất kỳ ai |
+| `area:webwallgl` | Trình kết xuất hình nền scene / web và cầu nối media | bất kỳ ai |
+| `area:ci-docs` | CI, các bộ kiểm tra bảo vệ (guards), tài liệu, chuỗi phát hành | bất kỳ ai |
 
-GitHub defaults (`bug` / `enhancement` / `documentation` / `good first issue` / `help wanted` / `question` / `duplicate` / `invalid` / `wontfix` / `accessibility`) keep their usual meaning. `good first issue` is only added to **accepted** issues with a confirmed small scope — it is a promise to new contributors.
+Các nhãn mặc định của GitHub (`bug` / `enhancement` / `documentation` / `good first issue` / `help wanted` / `question` / `duplicate` / `invalid` / `wontfix` / `accessibility`) giữ nguyên ý nghĩa thông thường. Nhãn `good first issue` chỉ được gắn cho các issue đã được **chấp nhận** (`status:accepted`) và xác nhận có phạm vi nhỏ — đây là cam kết dành cho người đóng góp mới.
 
-**Maintainer triage (weekly or on demand)**：读 `status:needs-triage` → 可复现/有价值的加 `status:accepted`、移除 `needs-triage`/`declined`、打 `area:*`（范围小再加 `good first issue`）；不做的标 `status:declined` 并写明原因后关闭 → 审阅 `/assign` 申请并按上文批准/指派 → 已受理但长期无人认领且影响面大的，挂维护者计划或 milestone。
+**Quy trình phân loại của maintainer (hàng tuần hoặc khi có nhu cầu)**: đọc các issue có `status:needs-triage` → nếu tái hiện được / có giá trị thì gắn `status:accepted`, gỡ `status:needs-triage` / `status:declined`, gắn `area:*` (nếu phạm vi nhỏ thì thêm `good first issue`); nếu không thực hiện thì gắn `status:declined`, nêu rõ lý do rồi đóng → duyệt các yêu cầu `/assign` và phê duyệt/gán theo mục trên → với issue đã chấp nhận nhưng lâu không có ai nhận và có mức ảnh hưởng lớn, đưa vào kế hoạch của maintainer hoặc milestone.
 
-**认领时限与回收**：认领后 **14 天**无进展且无留言说明，维护者可在该 issue 留言 @ 认领人后改派或释放。`/assign` 只是申请、不会立刻分配；本人 `/unassign` 取消申请或释放认领；维护者 `/unassign @login` 取消指定人，无参 `/unassign` 释放当前全部 assignee。
+**Thời hạn nhận issue và thu hồi**: sau khi nhận issue mà quá **14 ngày** không có tiến triển và không để lại bình luận cập nhật, maintainer có thể bình luận nhắc (`@`) người nhận trong issue rồi chuyển cho người khác hoặc giải phóng. `/assign` chỉ là lời đề nghị chứ không gán ngay; chính người xin dùng `/unassign` để hủy yêu cầu hoặc trả lại issue; maintainer dùng `/unassign @login` để hủy/gỡ người cụ thể, hoặc `/unassign` không tham số để gỡ toàn bộ assignee hiện tại.
 
-**自动门禁的部署边界**：可信 `pull_request_target` 工作流必须先合入默认分支 `main` 才生效；Ruleset 保留 `ci/result` 并追加 `issue-claim-policy`，合并要求统一为「现有代码 CI + `issue-claim-policy`」。GitHub 不能预先禁用 PR 创建页，因此执行方式是**创建后自动解释并关闭 + 必过检查阻断合并**。完整时间判据、违规关闭语义与 API 故障处理见上文 Approval 节。
+**Ranh giới triển khai của cổng tự động**: workflow tin cậy `pull_request_target` phải được gộp vào nhánh mặc định `main` mới có hiệu lực; Ruleset giữ nguyên `ci/result` và bổ sung `issue-claim-policy`, điều kiện merge thống nhất là **CI mã nguồn hiện có + `issue-claim-policy`**. Vì GitHub không thể tắt trước trang tạo PR, cơ chế thực thi là **tự động giải thích và đóng sau khi tạo + kiểm tra bắt buộc chặn merge**. Xem đầy đủ tiêu chí thời gian, ngữ nghĩa đóng PR vi phạm và xử lý lỗi API ở mục **Phê duyệt nhận issue trước khi mở PR** phía trên.
 
-## Choose the target branch / 选择目标分支
+## Chọn nhánh mục tiêu
 
-All changes target `main`. The plugin is **one natively cross-platform tree** (Windows / WSL / macOS / Linux) with no platform branch — a platform-specific change must not regress the others.
+Mọi thay đổi đều hướng tới nhánh `main`. Plugin này là **một cây mã nguồn đa nền tảng gốc duy nhất** (Windows / WSL / macOS / Linux), không có nhánh riêng theo nền tảng — thay đổi dành riêng cho một nền tảng tuyệt đối không được gây hồi quy (regression) trên các nền tảng khác.
 
-所有改动都提交到 `main`。本插件是**一份原生跨平台代码**（Windows / WSL / macOS / Linux），没有平台分支 —— 平台专属改动不得让其它平台回退。
+## Biên dịch từ mã nguồn chuẩn
 
-## Build from the canonical source / 从唯一源码构建
+- `src/client.js` là mã nguồn chuẩn duy nhất của phía trình duyệt. Sau khi chỉnh sửa, hãy chạy `npm run build` để tạo lại `lib/client.js`.
+- `lib/client.js` là sản phẩm sinh ra lúc build và **không được theo dõi trong git** (từ v1.4): chạy `npm run build` để tạo ở máy cục bộ; còn trong gói npm và tarball Release thì `prepack` sẽ tạo trực tiếp khi đóng gói. Không chỉnh sửa thủ công tệp này.
+- Thay đổi phía máy chủ (host) nằm trực tiếp trong `lib/index.js` và các module host `lib/*.js` khác.
+- Sau khi sửa mã phía host, bắt buộc **khởi động lại DSH**: `lib/*.js` chỉ được nạp khi khởi động và không bao giờ tự cập nhật nóng trong phiên đang chạy.
+- Khi cài đặt bản dev cục bộ, hãy **đóng hoàn toàn ứng dụng trước** và dùng trình cài đặt mã nguồn đầy đủ ở bên dưới. Chỉ liên kết (link) riêng gói chính là không đủ để triển khai trọn bộ.
+- Hãy dùng đúng phiên bản Node.js mà profile DSH của bạn yêu cầu; kho lưu trữ này khai báo phiên bản hỗ trợ trong `engines.node` của `package.json`.
 
-- `src/client.js` is the canonical browser source. Edit it, then run `npm run build` to regenerate `lib/client.js`.
-- `lib/client.js` is generated at build time and **not tracked in git** (v1.4): `npm run build` produces it locally; `prepack` produces it inside npm / Release tarballs. Do not edit it by hand.
-- Host-side changes live directly in `lib/index.js` and the other `lib/*.js` host modules.
-- Restart DSH after host-side edits: `lib/*.js` is loaded at startup and is never hot-updated in a running instance.
-- Install a local dev build with the application **fully closed**, using the complete source installer below. Linking only the main package is insufficient.
-- Use the Node.js version your DSH profile requires; this repository declares `engines.node` in `package.json`.
+### `lib/client.js` thực chất là gì
 
-- `src/client.js` 是浏览器端唯一源码。修改后运行 `npm run build` 重新生成 `lib/client.js`。
-- `lib/client.js` 是构建期产物、**不入库**（v1.4 起）：本地跑 `npm run build` 生成；npm 包与 Release tgz 里由 `prepack` 在打包时现场构建。请勿手改。
-- 宿主端代码直接位于 `lib/index.js` 和其他 `lib/*.js` 模块中。
-- 改完宿主端代码需**重启 DSH**：`lib/*.js` 在启动时加载，运行中的实例不会热更新。
-- 安装本地 dev 构建请**先完全关闭应用**，使用下文的完整源码安装器；只链接主包不能部署完整套件。
-- 请使用你的 DSH profile 要求的 Node.js 版本；本仓在 `package.json` 的 `engines.node` 里声明。
+- **Cấu tạo**:
+  - `lib/client.js` = phần thân `src/client.js` **+ toàn bộ các module liệt kê trong `INLINE_MODULES`** (`scripts/build-client.mjs`), tất cả được gộp nội tuyến (inline) vào **cùng một** phạm vi `factory(require)`.
+  - `npm run build` sẽ in danh sách các module đã inline — **luôn đọc số lượng trực tiếp từ danh sách đó, tuyệt đối không ghi cứng con số vào tài liệu này** (trước đây từng ghi cứng một lần và đã bị lỗi thời).
+  - Do đó phần lớn số dòng của tệp đến từ `src/**` chứ không phải từ riêng `client.js` — nhìn bên ngoài giống một khối đơn thể (monolith), nhưng thực chất là một lát cắt mã nguồn được làm phẳng.
+- **Vì sao bắt buộc phải inline**:
+  - Phía trình duyệt **không có trình phân giải module cục bộ** — hàm `require` của trình nạp chỉ phân giải các gói bên ngoài, nên `import './panel-tabs.js'` không thể hoạt động lúc chạy.
+  - Mọi đoạn mã được tách khỏi `src/client.js` cho dễ đọc đều được inline trở lại làm phần mở đầu (prelude) trong cùng phạm vi khi build.
+  - Mỗi mục khai báo `markers`, và thiếu bất kỳ marker nào sẽ gây **lỗi build cứng** — đây là cơ chế đảm bảo việc tách tệp không bao giờ âm thầm biến thành rỗng.
+  - Đầu ra cũng phải phân tích cú pháp hợp lệ (`new Script(...)`) trước khi được ghi ra đĩa.
+- **Vai trò của nó**:
+  - `package.json` công khai tệp này qua `exports["./client"]` kèm `dsh.client.immediately: true`; trình nạp client của DSH lấy tệp dựa trên siêu dữ liệu gói (không có route nào phía host phục vụ tệp này).
+  - Tệp được **biên dịch lúc build, không lưu vào git** (từ v1.4): gói npm / tarball Release nhận tệp từ `prepack` lúc đóng gói, còn bản dev `link:` nhận tệp từ `npm run build`.
+  - Các cách cài đặt được hỗ trợ là trình cài đặt mã nguồn đầy đủ bên dưới, và sau khi trọn bộ gói đã phát hành chính thức thì hỗ trợ cài theo tên gói npm hoặc bộ Release đầy đủ.
+  - Cài trực tiếp kiểu `github:` trần sẽ không build phần client và không đăng ký đủ các gói con, nên **không được hỗ trợ**.
+- **Nguyên tắc 1 — build lại trước khi kiểm chứng**:
+  - Mọi thay đổi trong `src/**` đều yêu cầu chạy `npm run build` trước khi chạy `verify` hoặc đóng gói (không còn chuyện “quên commit tệp build”).
+  - CI sẽ build lại rồi kiểm tra khẳng định tệp build **không nằm trong git**.
+  - **Chuỗi kiểm tra cục bộ cũng kiểm tra độ mới** thông qua `test/verify-client-sync.mjs`: nó build lại, so sánh từng byte rồi khôi phục lại tệp (guard không làm bẩn cây làm việc) ⇒ tệp build bị cũ sẽ báo đỏ **trước khi bạn push**.
+- **Nguyên tắc 2**: không bao giờ sửa tay `lib/client.js`, vì lần build kế tiếp sẽ ghi đè toàn bộ.
+- **Nguyên tắc 3 — tệp build là một hợp đồng (contract)**: nhiều guard chạy trực tiếp trên tệp **đã build** (`verify-readability`, `verify-softrender`, `verify-client`), và một số guard trích xuất stylesheet từ tệp này theo mốc đầu dòng (line-leading anchor). Đó là lý do `src/styles.js` cấm dấu backtick và cấm chép nguyên văn câu lệnh khai báo của chính nó trong phần chú thích — chỉ một dấu backtick lạc từng khiến `verify-host-paint-scope` báo lỗi `"bare backticks: 489"`.
+- **Cạm bẫy — chú thích trong `src/**` được gửi kèm đến người dùng**: với những đại lượng có thể thay đổi như số dòng hay dung lượng, hãy ghi *lệnh đo* thay vì viết con số cứng (trước đây có hai chú thích đầu module ghi `src/client.js` dài “9.500 dòng” — cả hai đã được sửa, đừng viết lại kiểu đó).
+- **Đừng cố “thu gọn” nó như thể nó là một khối đơn thể**: kích thước của nó chính là kích thước của `src/**`. Đòn bẩy nằm ở các tệp nguồn.
 
-### What `lib/client.js` actually is / `lib/client.js` 到底是什么
+## Cài đặt bản dev cục bộ từ mã nguồn (dành cho nhà phát triển)
 
-- **Anatomy**:
-  - `lib/client.js` = the `src/client.js` body **+ every module listed in `INLINE_MODULES`** (`scripts/build-client.mjs`), all inlined into a single `factory(require)` scope.
-  - `npm run build` prints that inlined list — **read the count off that list, never from prose here** (a hardcoded number in this file has already gone stale once).
-  - Most of the file's lines therefore come from `src/**`, not from `client.js` itself — it *looks* like a monolith but is a flattened repository slice.
-- **Why inlining**:
-  - the browser half has **no local-module resolver** — the loader's `require` resolves only external packages, so `import './panel-tabs.js'` cannot work at runtime.
-  - Everything split out of `src/client.js` for readability is inlined back as a prelude in the same scope.
-  - Each entry declares `markers`, and a missing marker is a **hard build failure** — that is what stops the split from silently going empty.
-  - The output must also parse (`new Script(...)`) before it is written.
-- **Its role**:
-  - `package.json` exposes it as `exports["./client"]` with `dsh.client.immediately: true`; the DSH client loader fetches it from package metadata (no host route serves it).
-  - It is **built, never tracked** (v1.4): npm / Release tarballs get it from `prepack` at packaging time, and a `link:` dev checkout gets it from `npm run build`.
-  - The supported paths are the complete source installer below and, after all packages are published, the npm package name or complete Release set.
-  - A raw `github:` install does not build the clients or register all subpackages and is **not supported**.
-- **Rule 1 — rebuild before verifying**:
-  - any `src/**` change requires `npm run build` before `verify` / packaging (there is no committed artifact left to forget).
-  - CI rebuilds and then asserts the artifact is **not tracked**.
-  - The **local chain asserts freshness** via `test/verify-client-sync.mjs`: it rebuilds, compares byte-for-byte, and restores the file — so a stale artifact fails **before you push**.
-- **Rule 2**: never hand-edit `lib/client.js`; the next build overwrites it.
-- **Rule 3 — the artifact is a contract**: several guards test the **built** file (`verify-readability`, `verify-softrender`, `verify-client`), and some extract the stylesheet from it by a line-leading anchor. That is why `src/styles.js` forbids backticks and literal copies of its own declaration in its comments — one stray backtick once made `verify-host-paint-scope` report "bare backticks: 489".
-- **Trap — comments in `src/**` ship to users**: prefer the *measurement command* over a number that drifts (two module headers once cited `src/client.js` as "9,500 lines" — both are fixed now; don't write one back).
-- **Don't shrink it as if it were a monolith**: its size is the size of `src/**`. The lever is the sources.
+> **Mã nguồn thử nghiệm nội bộ (gray-test):** khi thay đổi chưa được gộp lên nhánh chính upstream, hãy tải từ kho và nhánh thử nghiệm hiện tại, không dùng nhánh `main` của upstream trong các ví dụ clone bên dưới để thay thế.
 
-- **构成**：
-  - `lib/client.js` = `src/client.js` 正文 **+ `INLINE_MODULES` 里的每一个模块**（见 `scripts/build-client.mjs`），全部内联进**同一个** `factory(require)` 作用域。
-  - `npm run build` 会把内联清单打印出来 —— **条数只许从那份清单现读，不要写进本文件**（这里写死过一次，已经漂了）。
-  - **它的大部分行来自 `src/**` 而不是 `client.js` 自己**（占比同样按那份清单复算，勿记死数）—— 看着像巨石，实为"压平的仓库切片"。
-- **为什么必须内联**：
-  - 浏览器半边**没有本地模块解析器** —— loader 的 `require` 只解析外部包，`import './panel-tabs.js'` 在运行时根本不成立。
-  - 凡为可读性拆出去的代码，都在构建期作为 prelude 内联回同一作用域。
-  - 每项都带 `markers`，**缺任何一个都构建硬失败** —— 这正是"拆分不会悄悄变空"的保证。
-  - 产物还必须能通过 `new Script(...)` 解析才会被写出。
-- **它的身份**：
-  - `package.json` 用 `exports["./client"]` + `dsh.client.immediately: true` 暴露它，DSH 客户端加载器按**包元数据**取（宿主侧没有任何路由发它）。
-  - 它**构建、但不入库**（v1.4 起）：npm 包与 Release tgz 由 `prepack` 在打包时生成；`link:` 开发检出由 `npm run build` 生成。
-  - 支持下文的**完整源码安装器**；整套包正式发布后也支持 **npm 包名 / 完整 Release 集合**。
-  - 裸 `github:` 直装不构建客户端，也不会登记全部子包，**不支持**。
-- **铁律一 —— 先重建再验证**：
-  - 改任何 `src/**` 都要在 `verify` / 打包前 `npm run build`（已无"产物忘了提交"这回事）。
-  - CI 重建后判**产物不入库**。
-  - **本地链同样判新鲜度**：`test/verify-client-sync.mjs` 会重建、逐字节比对、并把文件**还原**（守卫不改工作树）⇒ 产物过期会在 **push 之前**就红。
-- **铁律二**：绝不手改 `lib/client.js`，下一次构建会抹掉。
-- **铁律三 —— 产物即契约**：多个守卫跑的是**产物**（`verify-readability`、`verify-softrender`、`verify-client`），另有一些**按行首锚点从产物里**取样式表。这就是 `src/styles.js` 禁止在自己注释里写反引号、也禁止复述那条声明语句的原因（实测踩到过：`verify-host-paint-scope` 报"裸反引号 489"）。
-- **陷阱 —— `src/**` 的注释会随包发给用户**：涉及行数 / 体积这类会漂的量，写**复算命令**而不是写数字（曾有两处模块头注释把 `src/client.js` 说成"9,500 行"，现已修掉 —— 别再写回去）。
-- **不要把它当巨石来"治理"**：它的体积就是 `src/**` 的体积，杠杆在源文件。
+### 1. Lấy mã nguồn (`checkout`)
 
-## Install a local dev build / 从本地源码安装（开发者）
-
-> **Gray-test checkouts:** when a change has not reached upstream, download the current gray-test repository and branch, not the upstream `main` shown in the clone examples below.
->
-> **灰测源码**：未合入上游的改动，请从当前灰测仓库及分支下载，不要用下面示例中的上游 `main` 代替灰测源码。
-
-### 1. Get the code (`checkout`) / 取得源码
-
-> *checkout* simply means "get a copy of the source code into a folder on your machine": click **Code → Download ZIP** on the GitHub page and unzip it, or clone it with Git:
+> *checkout* đơn giản nghĩa là “lấy một bản sao mã nguồn về một thư mục trên máy của bạn”: bấm **Code → Download ZIP** trên trang GitHub rồi giải nén, hoặc clone bằng Git:
 >
 > ```sh
-> git clone https://github.com/elysia395/dsh-wallpaper-engine.git
+> git clone https://github.com/TunAnh0711/dsh-wallpaper-engine-vi.git
 > ```
 >
-> You then have a folder containing `package.json`, `lib/`, `src/` and `cordis.patch.yml` — called **the plugin folder** below.
+> Sau khi hoàn tất, bạn sẽ có một thư mục chứa `package.json`, `lib/`, `src/` và `cordis.patch.yml` — bên dưới gọi là **thư mục plugin**.
 
-> *checkout* 的意思很简单：把源代码下载 / 复制一份到你电脑的某个文件夹里。通常在这个 GitHub 页面点 **Code → Download ZIP** 下载并解压，或用 Git 克隆：
->
-> ```sh
-> git clone https://github.com/elysia395/dsh-wallpaper-engine.git
-> ```
->
-> 完成后你会得到一个包含 `package.json`、`lib/`、`src/`、`cordis.patch.yml` 的文件夹。下文把这个文件夹称作**插件文件夹**。
+### 2. Cài đặt trọn bộ mã nguồn
 
-### 2. Install the complete source set / 安装完整源码套件
-
-Requires Node.js and a DSH kernel within the ranges declared in `package.json`'s `engines` (the 0.2 line qualifies), plus pnpm. Enter the checkout directory and completely close the target application. Use the target host's actual DSH data directory, not an assumed `~/.dsh`.
-
-要求 Node.js 与 DSH 内核都落在 `package.json` 的 `engines` 声明内（0.2 线可装），另需 pnpm。进入插件目录，先完全退出目标宿主，并确认该宿主实际使用的 DSH 数据目录。
+Yêu cầu Node.js và nhân DSH nằm trong khoảng phiên bản khai báo tại mục `engines` của `package.json` (nhánh 0.2 đáp ứng yêu cầu), kèm theo `pnpm`. Đi vào thư mục plugin, **đóng hoàn toàn ứng dụng đích**, và xác nhận đúng thư mục dữ liệu DSH thực tế mà host đó đang sử dụng (không tự mặc định là `~/.dsh`).
 
 ```sh
-node scripts/install-source.mjs --profile desktop --dsh-home "<目标 DSH 数据目录>" --app-closed
+node scripts/install-source.mjs --profile desktop --dsh-home "<thư mục dữ liệu DSH đích>" --app-closed
 ```
 
-Use `web` for the web profile. Add `--dry-run` to inspect the target without changing it. Desktop profiles require the carrier CLI installed by the desktop host; the standalone npm CLI rejects `desktop`. For web profiles without `dsh` on PATH, pass `--dsh-cli "<DSH CLI lib/bin.js>"`.
+Dùng `--profile web` cho host trình duyệt (web). Thêm `--dry-run` để kiểm tra trước mục tiêu mà không ghi thay đổi. Profile `desktop` bắt buộc dùng carrier CLI do ứng dụng desktop cài đặt; npm CLI độc lập sẽ từ chối quản lý `desktop`. Với profile `web` nếu chưa có lệnh `dsh` trong `PATH`, hãy truyền thêm `--dsh-cli "<đường dẫn tới lib/bin.js của DSH CLI>"`.
 
-网页宿主使用 `--profile web`。先加 `--dry-run` 可只核对目标。桌面 profile 必须使用桌面宿主安装的 carrier CLI；独立 npm CLI 不允许管理 `desktop`。网页版找不到 `dsh` 命令时，可传入 `--dsh-cli "<DSH CLI 的 lib/bin.js 路径>"`。
+Trình cài đặt sẽ chạy `npm ci`, biên dịch phần client và đăng ký cả 9 gói (1 gói chính + 8 gói con) dưới dạng phụ thuộc `link:` bền vững qua DSH. Chỉ giữ lại lựa chọn bundle của gói chính vì nó sở hữu bản vá hoàn chỉnh — chọn thêm bundle của các gói con sẽ làm nhân đôi các hàng trong giao diện. Các lựa chọn bundle khác và công tắc theo từng hàng hiện có được giữ nguyên. Không được chỉ link riêng gói chính, và cũng không dùng công cụ tạo junction tạm thời làm quy trình cài đặt chính thức.
 
-The installer runs `npm ci`, builds the clients, and registers all nine packages as persistent `link:` dependencies. Only the main bundle remains selected; it owns the complete patch, so selecting the child bundles as well duplicates their rows. Other bundle selections and row-level settings remain unchanged.
+Khi cập nhật, hãy đóng host, cập nhật toàn bộ thư mục mã nguồn rồi chạy lại đúng lệnh trên. Giữ nguyên vị trí thư mục mã nguồn trong suốt thời gian plugin đang được cài đặt (không di chuyển hay xóa).
 
-脚本安装仓库依赖、构建客户端，通过 DSH 将主包和 8 个子包登记为持久 `link:` 依赖。只保留主包 bundle 选择，避免子包 patch 重复插入行；其他 bundle 选择和现有行级开关不变。不要只链接主包，也不要把临时 junction 工具当成正式安装流程。
-
-For an update, close the host, update the entire checkout, and rerun the same command. Keep the source directory in place while installed.
-
-更新时先关闭宿主，更新整个源码目录，再重跑同一命令。安装后不要移动或删除源码目录。
-
-### Release set / 发布集
+### Bộ phát hành (Release set)
 
 ```sh
 npm run pack:release
 ```
 
-This builds clients and creates nine tarballs plus `release-set.json` under a unique `.test-cache/release/set-*` directory. The staged main manifest lists each of the eight child packages at its exact real version, with no pet or Electron dependency. Publish children first and the main package last, following `publishOrder`. This command never publishes anything. A raw root `npm pack` uses the development manifest, not the complete release set. Do not publish a test version without explicit approval.
+Lệnh này biên dịch phần client và tạo 9 tệp tarball cùng tệp `release-set.json` trong một thư mục riêng `.test-cache/release/set-*`. Manifest của gói chính ở dạng phát hành sẽ liệt kê 8 gói con theo đúng phiên bản chính xác thực tế làm phụ thuộc chạy (runtime dependencies), không kèm pet hay Electron. Khi phát hành chính thức, phải đăng các gói con trước rồi mới đăng gói chính sau cùng theo đúng `publishOrder`. Lệnh này không bao giờ tự đăng tải (publish) bất cứ thứ gì. Chạy `npm pack` trần ngay tại thư mục gốc chỉ tạo gói theo manifest phát triển, không phải bộ phát hành hoàn chỉnh. Không phát hành bản thử nghiệm lên npm khi chưa có sự phê duyệt rõ ràng.
 
-该命令构建客户端，在独立的 `.test-cache/release/set-*` 目录生成九个 tarball 和 `release-set.json`。发布形态主包将八个子包的真实精确版本列为运行依赖，不包含 pet 或 Electron。正式发布按 `publishOrder` 先子包、后主包。此命令不执行发布；源码根目录直接 `npm pack` 仍是开发清单，不能当成完整发布集。灰测阶段未经明确批准，不要发布 npm。
+Quy trình đầy đủ — kênh npm, tệp đính kèm GitHub Release, bước tự kiểm tra sau phát hành, đồng bộ mirror và khôi phục (rollback) — nằm ở mục **Quy trình phát hành (dành cho maintainer)** ở cuối tài liệu này. Có hai quy tắc không thể nhân nhượng: cả 8 gói con phải đã có mặt công khai trên registry ở cùng phiên bản trước khi gói chính có thể dùng được (`pnpm add` phân giải 8 phiên bản chính xác từ registry, nên phát hành riêng gói chính sẽ gây lỗi `ERR_PNPM_FETCH_404`), và GitHub Release bắt buộc phải đính kèm đủ **9 tệp tarball + `release-set.json`** — một bản Release chỉ có gói chính là gói không thể cài đặt. Để cài bộ phát hành ngoại tuyến (offline), hãy dùng `npm run install:release -- --set <thư mục> --profile <tên> --dsh-home <thư mục> --app-closed` (lệnh này ghi `overrides` vào profile để ghim 8 gói con tới các tarball nằm cùng thư mục); tuyệt đối không đưa riêng một tệp tarball gói chính cho trình cài đặt desktop.
 
-The full procedure — npm channel, GitHub Release assets, post-publish self-checks, mirror sync and rollback — is in the “Release procedure (maintainers)” section at the end of this file. Two rules are not negotiable: every child package must be on the registry at the same version before the main package is usable (`pnpm add` resolves the eight exact versions from the registry, so a main-only release fails with `ERR_PNPM_FETCH_404`), and a GitHub Release must carry all nine tarballs plus `release-set.json` — a main-only Release is an uninstallable package. For the offline release set use `npm run install:release -- --set <dir> --profile <name> --dsh-home <dir> --app-closed`, which pins the eight children to the sibling tarballs through profile `overrides`; never hand the desktop installer a single main tarball.
+Trên Windows, hãy dùng bản Node.js hiện hành đã cập nhật đầy đủ bản vá khi đóng gói, và đảm bảo npm dùng chung đúng runtime Node.js đó. Luôn đối chiếu dải Node hỗ trợ theo `engines` trong `package.json`, và phiên bản Node của CI theo `setup-node` trong các workflow — không chép cứng số phiên bản ở đây.
 
-完整发布流程（npm 通道、GitHub Release 资产、发布后自证、镜像同步与回滚）见本文末尾「发布流程（维护者）」节。两条规则不可让：主包可用的前提是八个子包已在同一版本上公开（主包把八个**精确版本**声明为运行依赖，只发主包会让用户的 `pnpm add` 以 `ERR_PNPM_FETCH_404` 失败）；GitHub Release 必须挂**九个 tarball + `release-set.json`**，只挂主包的 Release 是一个装不上的包。离线安装发布集用 `npm run install:release -- --set <目录> --profile <name> --dsh-home <目录> --app-closed`（它把八个子包钉到同目录 tarball 的 `overrides` 写进 profile），不要把单个主包 tarball 交给桌面安装器。
+### 3. Khởi động lại để xác nhận
 
-On Windows, use a current patched Node.js release for packaging, and ensure npm uses the same Node.js runtime. Take the supported Node range from `package.json`'s `engines`, and CI's Node version from `setup-node` in the workflows — do not pin a version here.
+Sau đó khởi động lại `dsh web`. Phần host plugin sẽ trở thành một lớp bundle và phần client plugin sẽ tự động nạp (`dsh.client.immediately: true`).
 
-Windows 打包请使用已更新补丁版本的 Node.js，并确认 npm 使用同一套 Node.js 运行时；支持范围以 `package.json` 的 `engines` 为准，CI 的 Node 版本以工作流里的 `setup-node` 为准，不要照抄本文件的版本号。
+Nếu Steam được cài ở vị trí không theo mặc định, phía host sẽ tự động phát hiện thông qua `libraryfolders.vdf` — không cần cấu hình thêm.
 
-### 3. Restart / 重启确认
+> **Lưu ý về profile và “bắt buộc đóng ứng dụng trước”**: ví dụ ở trên dùng `--profile desktop`, yêu cầu carrier CLI của ứng dụng desktop; nếu mục tiêu là bản web, hãy đổi sang `--profile web`. Trước khi cài đặt bắt buộc phải **đóng hoàn toàn ứng dụng đích** (cài đặt khi ứng dụng đang chạy sẽ dừng ở trạng thái `startup-unconfirmed` và trạng thái khôi phục sẽ tự động rollback ở lần khởi động tiếp theo).
 
-Then restart `dsh web`. The host plugin becomes a bundle layer and the client plugin auto-loads (`dsh.client.immediately: true`).
+## Kiểm chứng trước khi mở PR
 
-然后重启 `dsh web`。host 端会成为 bundle 层，client 端会自动加载（`dsh.client.immediately: true`）。
+Trước tiên, hãy chọn nhánh kiểm chứng dựa trên **toàn bộ diff của PR**, không chỉ nhìn vào commit cuối cùng:
 
-If Steam is installed in a non-standard location, the host auto-detects it via `libraryfolders.vdf` — nothing further is required. / 如果 Steam 装在非标准位置，host 会通过 `libraryfolders.vdf` 自动探测，无需额外配置。
+- **Chỉ tài liệu (`docs`)**: README, hướng dẫn đóng góp và các tệp Markdown thông thường nằm trong danh sách cho phép rõ ràng sẽ chạy kiểm tra tài liệu gọn nhẹ. Không cài đặt phụ thuộc sản phẩm, không build, không chạy kiểm tra tĩnh toàn kho hay kiểm thử runtime.
+- **Tư liệu minh họa tài liệu (`docs-assets`)**: chỉ bao gồm hình ảnh và bản nguồn dàn trang dùng cho tài liệu; bổ sung kiểm tra hình ảnh và liên kết tham chiếu; nếu ảnh hưởng bố cục thì kiểm tra xem trước trên máy tính / điện thoại. Tài nguyên dùng lúc chạy (runtime assets) không thuộc loại này.
+- **Kiểm chứng đầy đủ (`full`)**: bất kỳ thay đổi nào liên quan đến mã nguồn, schema, phụ thuộc, manifest gói, bộ kiểm thử, CI, tài liệu hợp đồng sinh tự động hoặc đường dẫn chưa rõ. Nếu sửa lẫn cả mã nguồn lẫn tài liệu thì vẫn chọn nhánh này; nếu không thể lấy đầy đủ diff thì buộc chạy toàn bộ hoặc chặn lại, tuyệt đối không mặc định là tài liệu.
 
-> **注意 profile 与「应用必须先关闭」**：上面的示例用 `--profile desktop`，需要桌面宿主的 carrier CLI；若目标是网页端，请改成 `--profile web`。安装前务必**先完全关闭目标应用**（应用运行期间安装会停在 `startup-unconfirmed`，恢复状态会在下次启动时自动回滚）。
+Với các thay đổi chỉ liên quan đến tài liệu, hãy dùng bước kiểm tra tài liệu gọn nhẹ riêng. Các thay đổi có pha trộn mã nguồn, phụ thuộc, CI, hợp đồng sinh tự động và đường dẫn lạ vẫn phải chạy kiểm chứng đầy đủ. `verify:docs` là kiểm tra nội vụ kho lưu trữ, **không phải** nhánh kiểm tra nhanh cho tài liệu.
 
-## Verify before opening a PR / 提交 PR 前验证
-
-先按本次 PR 的**完整差异**选择验证路径，不只看最后一笔提交：
-
-- **纯文档（`docs`）**：README、贡献指南和明确白名单内的普通 Markdown，运行轻量文档检查。不安装产品依赖，不构建，不跑全仓静态检查或运行时测试。
-- **文档展示素材（`docs-assets`）**：仅文档使用的图片和排版源稿，增加图片与引用检查；影响排版时补桌面 / 手机预览。运行时素材不属于此类。
-- **完整验证（`full`）**：任意代码、schema、依赖、包清单、测试、CI、生成契约文档或未知路径。与文档混改仍选此路径；无法完整取得差异时全量或阻断，不能默认文档。
-
-For documentation-only changes, use the dedicated lightweight document check. Mixed code, dependencies, CI, generated contracts and unknown paths retain full verification. `verify:docs` is repository housekeeping, **not** the documentation fast path.
-
-完整路径继续执行：
+Với nhánh kiểm chứng đầy đủ, tiếp tục chạy:
 
 ```sh
-npm ci              # 本地安装工具链；CI 使用受控安装参数
-npm run verify:all  # = build + verify（硬档）+ verify:docs（软档）+ smoke
+npm ci              # Cài đặt chuỗi công cụ cục bộ; CI dùng các cờ cài đặt có kiểm soát
+npm run verify:all  # = build + verify (mức cứng) + verify:docs (mức mềm) + smoke
 ```
 
-`verify:all` 的含义不变。分类不会豁免代码改动，也不把此前门禁失败或未执行项变为通过。
+Ý nghĩa của `verify:all` không thay đổi. Việc phân loại không miễn trừ thay đổi mã nguồn, và không biến các cổng kiểm tra bị lỗi hoặc chưa chạy trước đó thành đạt.
 
-**提交前必须全绿的是硬档**（`npm run verify`：真机行为 / 发布面 / 平台契约 / 打包面）。
-软档（`npm run verify:docs`：仓库内务 —— 模块布局 / 可达性 / 退役线 / 声明孤儿）
-**照跑、照打印结论，但不拦 PR** —— 判据一字未改，退出码由 `test/warn-only.mjs` 降级为警告
-（原码打在 `[warn-only] 软档守卫原退出码 = N` 行上）。
-> **两档各含哪些守卫、分档判据是什么，只在 [`docs/DEV-GUIDE.md`](docs/DEV-GUIDE.md) §4.2 定义一处**
-> —— 这里刻意不列清单（此前抄过一份，删掉两条守卫后就过时了，正说明为什么不该抄）。
+**Phần bắt buộc phải xanh hoàn toàn trước khi gửi PR là mức cứng** (`npm run verify`: hành vi thực tế / bề mặt phát hành / hợp đồng nền tảng / bề mặt đóng gói).
+Mức mềm (`npm run verify:docs`: nội vụ kho lưu trữ — bố cục module / tính khả đạt / lộ trình loại bỏ / khai báo mồ côi) **vẫn chạy và in đầy đủ kết luận, nhưng không chặn PR** — tiêu chí không đổi một chữ, chỉ có mã thoát được `test/warn-only.mjs` hạ xuống mức cảnh báo (mã thoát gốc được in trên dòng `` `[warn-only] 软档守卫原退出码 = N` ``).
 
-`.github/workflows/verify.yml` 三个阶段：`changes` 作业先用 `node scripts/ci-routing.mjs check` 分类——PR 事件取 merge-base 完整 PR 差异（`--base-mode merge-base`），push 事件取 `before → after` 原样差异（`--base-mode exact`：force-push 后 before 不一定是 after 的祖先，merge-base 会漏算 before 独有的代码删除），workflow_dispatch 无事件边界 ⇒ `github.sha → github.sha` 空差异 ⇒ 分类器保守完整验证；差异取不全 ⇒ fail-closed 全量，绝不误判文档。纯文档路径由 `docs` 作业对**同一差异、同一模式档**再跑一次 `node scripts/ci-routing.mjs docs`（文档引用 / 冲突标记 / 素材类型检查；差异里混入代码或未知路径 ⇒ 退出码 3 明确拒绝，不以假成功放行；其 checkout 显式指向 head 提交，保证被审计的树就是被分类的树）。**判定脚本（分类器 / docs 审计 / 汇总器）一律从 base 分支取，不执行 PR 树里的同名文件**（信任边界：判据不能由被审计的 PR 提供）。完整路径保留 Windows / Ubuntu 两个平台、静态门禁、构建、运行守卫、媒体桥与冒烟；仓库内务（`verify:docs`）已移到 `.github/workflows/housekeeping.yml` 每周定时 + 手动，不在 PR 必过链里。固定 `ci/result` 汇总在 `if: always()` 下核验所选作业确实成功：取消、失败、缺结果或意外跳过不能放行；Ruleset 的 Required checks 当前为 `ci/result` + `issue-claim-policy`（见本文「Issue triage & labels」节）。
+> **Danh sách từng guard thuộc mỗi mức và tiêu chí phân mức chỉ được định nghĩa tại một nơi duy nhất là [`docs/DEV-GUIDE.md`](docs/DEV-GUIDE.md) §4.2** — tài liệu này cố ý không chép lại danh sách (trước đây từng chép một bản và đã bị lỗi thời ngay khi xóa hai guard, càng chứng minh vì sao không nên sao chép).
 
-完整路径还检查产物不入库（`git ls-files -- lib/client.js docs/images` 必须为空），并扫描被跟踪文件的尾随空白与冲突标记。产物同步仍由 `test/verify-client-sync.mjs` 真跑构建逐字节检查。
+`.github/workflows/verify.yml` gồm ba giai đoạn: job `changes` trước hết chạy `node scripts/ci-routing.mjs check` để phân loại — sự kiện PR lấy toàn bộ diff tính từ merge-base (`--base-mode merge-base`), sự kiện push lấy nguyên diff `before → after` (`--base-mode exact`: sau force-push thì `before` chưa chắc là tổ tiên của `after`, dùng merge-base sẽ bỏ sót phần mã bị xóa chỉ có ở `before`), còn `workflow_dispatch` không có ranh giới sự kiện ⇒ diff rỗng `github.sha → github.sha` ⇒ bộ phân loại chọn an toàn là kiểm chứng đầy đủ; nếu không lấy đủ diff ⇒ fail-closed chạy toàn bộ, tuyệt đối không nhận nhầm thành tài liệu. Nhánh chỉ tài liệu sẽ để job `docs` chạy lại `node scripts/ci-routing.mjs docs` trên **đúng cùng diff và cùng chế độ** (kiểm tra liên kết tài liệu / dấu xung đột / loại tài nguyên; nếu diff lẫn mã nguồn hoặc đường dẫn lạ ⇒ thoát với mã 3 để từ chối rõ ràng, không cho qua giả; bước checkout chỉ rõ commit head để đảm bảo cây mã nguồn được kiểm toán đúng là cây vừa được phân loại). **Mọi script đánh giá (bộ phân loại / kiểm toán docs / bộ tổng hợp) luôn được lấy từ nhánh base, tuyệt đối không thực thi tệp cùng tên trong cây mã nguồn của PR** (ranh giới tin cậy: tiêu chí đánh giá không được phép do chính PR đang bị kiểm toán cung cấp). Nhánh kiểm chứng đầy đủ duy trì cả hai nền tảng Windows / Ubuntu, cổng tĩnh, build, guard runtime, cầu nối media và kiểm thử khói (smoke); phần nội vụ kho (`verify:docs`) đã được chuyển sang `.github/workflows/housekeeping.yml` chạy định kỳ hàng tuần + thủ công, không nằm trong chuỗi bắt buộc của PR. Bước tổng hợp cố định `ci/result` chạy dưới `if: always()` để xác nhận job được chọn thực sự thành công: hủy, thất bại, thiếu kết quả hoặc bị bỏ qua ngoài ý muốn đều không được duyệt qua; các Required checks của Ruleset hiện tại là `ci/result` + `issue-claim-policy` (xem mục **Phân loại issue & nhãn** phía trên).
 
-CI 完整路径使用 `npm ci --omit=peer --ignore-scripts --no-audit --no-fund` 安装依赖，随后运行静态检查。build / verify / smoke 仍只直接引用 `node:` 内置模块及仓库相对路径，P5 的零裸依赖判据不变。文档快通道无需这一步安装。
+Nhánh đầy đủ còn kiểm tra tệp build không bị đưa vào git (`git ls-files -- lib/client.js docs/images` bắt buộc phải rỗng), đồng thời quét khoảng trắng thừa cuối dòng và dấu xung đột (conflict markers) trên các tệp đang theo dõi. Độ đồng bộ của tệp build vẫn do `test/verify-client-sync.mjs` chạy build thật và so sánh từng byte.
 
-### Harness compatibility CI / harness 适配 CI（基线制）
+Nhánh đầy đủ trên CI cài đặt phụ thuộc bằng `npm ci --omit=peer --ignore-scripts --no-audit --no-fund`, sau đó chạy kiểm tra tĩnh. Các bước build / verify / smoke vẫn chỉ import trực tiếp các module tích hợp sẵn `node:` và đường dẫn tương đối trong kho lưu trữ, giữ nguyên tiêu chí P5 không phụ thuộc trần. Nhánh nhanh cho tài liệu không cần bước cài đặt này.
 
-- `.github/workflows/harness-compat.yml`：**只按需运行** —— 触发面只有手动派发
-  （`gh workflow run harness-compat.yml [-f harness_version=<版本>] [-f force=true]`，不挂
-  schedule / push）。目标对（harness 版本 × 插件 commit）**已被基线覆盖则秒过**；
-  否则安装该 harness → link 本插件进**隔离 profile** → 启动 `dsh --profile web` 探活
-  （宿主路由 / 落盘诊断 / 日志判据，见 `test/compat-harness-live.mjs`）→ `npm run verify:all`。
-- **全绿才入基线**：`.github/harness-baseline.json` 只由该工作流在全绿后自动提交；
-  任何一步失败 ⇒ 工作流红、基线保持上一个全绿对；失败的目标对**不会自动重试**，下次派发时再跑。
-- **第三方边界**：该工作流不跑 `verify:bridge` / `verify:e2e`；探活期间 `DSH_WE_MEDIA_LEGACY=1`
-  且只打 diag 族路由 ⇒ 媒体桥 / ffmpeg 全程不被拉起（媒体桥端到端仍由 `verify.yml` 覆盖）。
-- **UI 面清单棘轮**（`test/compat-harness-surfaces.mjs`）：已装 harness 的 `dsh-client-ui-*`
-  表面与提交清单 `test/fixtures/harness-ui-surfaces.json` 做差，**新表面未登记即红** ——
-  盖不盖由人裁定、裁定必须落盘；另对 `dsh-client-ui-sidebar-right` 真源码断言属性锚点与
-  隐藏机制 allowlist（#107 型回归的活判据）。
-- **逐页 DOM/样式断言**（`test/compat-harness-pages.mjs`，档位 2）：零依赖 CDP 驱动无头
-  浏览器进真 harness 走首页 → 会话页 → 设置页，对**计算样式**下判据（设置窗口玻璃的
-  backdrop / sheen 渐变 / token 接管 + 五分区逐页走查 + 零插件错误）；`--dump` 是探查模式。
-- 本地复跑：`node test/compat-harness-live.mjs`（需要 PATH 上有 `dsh` CLI 与网络；
-  profile 与插件数据都落在隔离目录，不碰真实 `~/.dsh`，可与 DSH Desktop 并存）。
+### CI kiểm tra tương thích harness (cơ chế đường cơ sở / baseline)
 
-- `.github/workflows/harness-compat.yml` runs **on demand only** — its sole trigger is manual
-  dispatch (`gh workflow run harness-compat.yml [-f harness_version=<ver>] [-f force=true]`; no
-  schedule or push trigger). A target pair (harness version × plugin commit) already in the baseline
-  skips in seconds; otherwise it installs that harness, links this plugin into an isolated profile,
-  boots `dsh --profile web` and probes it (`test/compat-harness-live.mjs`), then runs `npm run verify:all`.
-- **Only a fully green run becomes the baseline**: `.github/harness-baseline.json` is written solely by
-  that workflow after everything passes. Any failure turns the run red and leaves the previous green pair
-  as the baseline; a failed target is **not retried automatically** — it runs again on the next dispatch.
-- **Third-party boundary**: the workflow never runs `verify:bridge` / `verify:e2e`; the live probe sets
-  `DSH_WE_MEDIA_LEGACY=1` and only touches diag-family routes, so the media bridge / ffmpeg are never
-  started (bridge end-to-end stays covered by `verify.yml`).
-- **UI surface inventory ratchet** (`test/compat-harness-surfaces.mjs`): the installed harness's
-  `dsh-client-ui-*` surfaces are diffed against the committed inventory
-  `test/fixtures/harness-ui-surfaces.json` — **an unregistered new surface turns the run red** (whether
-  to cover it is a human adjudication, and the adjudication must land in that file); it also asserts the
-  attribute anchors and hide-mechanism allowlist against the *installed* `dsh-client-ui-sidebar-right`
-  source (the live form of the #107-class check).
-- **Per-page DOM/style assertions** (`test/compat-harness-pages.mjs`, tier 2): a zero-dependency CDP
-  client drives a headless browser through home → conversation → settings and asserts on **computed
-  styles** (the settings-window glass: backdrop, sheen gradient, token takeover; plus a five-section
-  walk with plugin styles present and zero plugin errors). `--dump` is the exploration mode.
-- Reproduce locally with `node test/compat-harness-live.mjs` (needs the `dsh` CLI on PATH and network;
-  profile and plugin data go to an isolated directory, so your real `~/.dsh` stays untouched and it can
-  coexist with DSH Desktop).
+- `.github/workflows/harness-compat.yml`: **chỉ chạy theo yêu cầu** — chỉ kích hoạt thủ công qua dispatch (`gh workflow run harness-compat.yml [-f harness_version=<phiên bản>] [-f force=true]`; không gắn `schedule` hay `push`). Nếu cặp mục tiêu (phiên bản harness × commit plugin) **đã được đường cơ sở bao phủ thì vượt qua trong vài giây**; ngược lại sẽ cài đặt harness đó → link plugin này vào một **profile cô lập** → khởi động `dsh --profile web` và thăm dò sống (route phía host / chẩn đoán ghi đĩa / tiêu chí log, xem `test/compat-harness-live.mjs`) → chạy `npm run verify:all`.
+- **Chỉ khi xanh toàn bộ mới ghi vào đường cơ sở**: `.github/harness-baseline.json` chỉ do duy nhất workflow này tự động commit sau khi mọi bước đều đạt. Bất kỳ bước nào lỗi ⇒ workflow báo đỏ và giữ nguyên cặp xanh trước đó làm đường cơ sở; cặp mục tiêu bị lỗi **sẽ không tự động thử lại**, mà sẽ chạy lại ở lần dispatch kế tiếp.
+- **Ranh giới bên thứ ba**: workflow này không chạy `verify:bridge` / `verify:e2e`; trong lúc thăm dò sống, biến `DSH_WE_MEDIA_LEGACY=1` được bật và chỉ gọi nhóm route `diag` ⇒ cầu nối media / ffmpeg không bao giờ bị khởi chạy (kiểm thử end-to-end cầu nối media vẫn do `verify.yml` phụ trách).
+- **Cơ chế chốt danh mục bề mặt UI** (`test/compat-harness-surfaces.mjs`): đối chiếu các bề mặt `dsh-client-ui-*` của harness đã cài với danh mục đã commit tại `test/fixtures/harness-ui-surfaces.json` — **bề mặt mới chưa được đăng ký sẽ làm kiểm tra báo đỏ** (có hỗ trợ bề mặt đó hay không do con người quyết định và quyết định phải được ghi vào tệp đó); đồng thời kiểm tra các mốc thuộc tính và danh sách cho phép cơ chế ẩn trên mã nguồn thật của `dsh-client-ui-sidebar-right` vừa cài (bản kiểm tra sống chống hồi quy dạng #107).
+- **Kiểm tra DOM/style từng trang** (`test/compat-harness-pages.mjs`, tầng 2): trình khách CDP không phụ thuộc điều khiển trình duyệt headless đi qua trang chủ → trang hội thoại → trang cài đặt và khẳng định trên **computed styles** (hiệu ứng kính cửa sổ cài đặt: backdrop / dải sheen gradient / tiếp quản token + duyệt 5 phân khu có đủ style plugin và không có lỗi plugin nào); cờ `--dump` dùng cho chế độ thăm dò.
+- Chạy lại cục bộ bằng `node test/compat-harness-live.mjs` (yêu cầu có `dsh` CLI trên `PATH` và kết nối mạng; profile và dữ liệu plugin nằm trong thư mục cô lập, không đụng tới `~/.dsh` thật và có thể chạy song song với DSH Desktop).
 
+Với các thay đổi giao diện (UI), vui lòng mô tả thêm bề mặt DSH thực tế bạn đã kiểm thử, bao gồm chế độ trình duyệt hay DSH Desktop. Với các thay đổi theo nền tảng, hãy nêu rõ cấu trúc nguồn dữ liệu đã dùng khi kiểm thử — ví dụ thư viện Wallpaper Engine của Steam, ổ mount WSL hoặc thư mục lưu trữ chứa các thư mục dự án WE.
 
-For UI changes, also describe the real DSH surface you tested, including browser or DSH Desktop mode. For platform-specific changes, call out the source layout used in the test—for example a Steam Wallpaper Engine library, a WSL mount, or a storage folder holding WE project directories.
+## Phát hành (Release)
 
-UI 改动还应说明实际测试过的 DSH 界面、浏览器或 DSH Desktop 模式。平台专属改动请注明测试数据来源，例如 Steam 的 Wallpaper Engine 库、WSL 挂载，或存储位置里的 WE 项目目录。
+- **Việc phát hành thuộc trách nhiệm của maintainer** (`elysia395/dsh-wallpaper-engine`): bản phát hành được đưa lên npm và GitHub Releases từ kho lưu trữ này theo nhịp độ của maintainer (không có pipeline tự động publish).
+- Chuỗi guard bảo vệ **bề mặt phát hành** thông qua `test/verify-package-publish.mjs` nằm trong `npm run verify`: tập đóng khả đạt (reachable closure) của `lib/index.js` phải được `files` bao phủ, không để rò rỉ thư mục phát triển vào gói, văn bản phát hành không được chứa đường dẫn thư mục home của máy khác, mọi mục trong `dependencies` phải thực sự được mã nguồn khả đạt nạp tới, và không có script lúc cài đặt nào tham chiếu tới tệp không nằm trong `files`.
+- Có thể kiểm tra bề mặt phát hành cục bộ bất kỳ lúc nào bằng `npm pack --dry-run` (số mục hiển thị sẽ nhiều hơn danh sách của guard đúng `package.json` + `LICENSE`).
+- **`engines.dsh` là bản sao đọc được bằng máy của yêu cầu phiên bản host.** Chợ plugin (và trình quản lý plugin của chính DSH) đọc trực tiếp trường này từ manifest đã phát hành — không qua catalog — rồi hiển thị lên thẻ plugin và đối chiếu với host đang chạy để cảnh báo khi không tương thích. Vì vậy trường này bắt buộc phải **thống nhất** với phần mô tả trong các tệp README và `docs/UPGRADING.md`; sửa một nơi phải sửa đủ tất cả. `dsh-better-sidebar` **không thể** biểu diễn ở đây (vì không phải peer `@deepseek-ai/*`) nên chỉ ghi trong phần mô tả văn bản.
+- **Không được để `scripts/prepare.mjs` hay `scripts/build-client.mjs` in bất kỳ thông tin nào ra `stdout`.** `prepack` chạy trong quá trình `npm pack` / `npm publish`, nên mọi thứ nó in ra sẽ rơi vào `stdout` của hai lệnh đó — trong khi cờ `--json` yêu cầu `stdout` **chỉ chứa duy nhất JSON** (thực nghiệm cho thấy chỉ một dòng `built …` đã đủ làm `npm pack --dry-run --json` không phân tích được). Mọi thông báo tiến trình phải đi qua `stderr`.
+- **Câu mô tả trong các tệp README về “gói npm chứa những gì” phải khớp đúng với tarball thực tế.** Tài liệu ghi gói npm không đính kèm `docs/`, đây là hệ quả thực tế đối với người đọc (các liên kết đó sẽ không mở được trên npm hoặc chợ plugin). Tuy nhiên viết rằng gói “chỉ chứa các tệp README” là **sai** — gói thực tế có cả `lib/**` và `cordis.patch.yml` — và chợ plugin sẽ hiển thị nguyên câu đó trên trang plugin. Hãy luôn đối chiếu với sản phẩm thật (`npm pack --dry-run` hoặc tarball đã phát hành), đừng chỉ nhìn mảng `files` bằng mắt.
 
-## Release / 发布
+## Danh sách kiểm tra PR
 
-- **Publishing is the maintainer's job** (`elysia395/dsh-wallpaper-engine`): releases go to npm and GitHub Releases from this repository, at the maintainer's discretion (no automated publish pipeline).
-- What the guard chain protects is the **publish surface**, via `test/verify-package-publish.mjs` inside `npm run verify`: the reachable closure of `lib/index.js` must be covered by `files`, no dev directories may leak into the package, published text must not carry another machine's home path, every `dependencies` entry must actually be loaded by reachable code, and no install-time script may reference a file that `files` does not ship.
-- Check the surface locally at any time with `npm pack --dry-run`（它给出的条目数会比守卫的清单多 `package.json` + `LICENSE`）。
-- **`engines.dsh` is the machine-readable copy of the host requirement.** The plugin market (and DSH's own plugin manager) reads it straight out of the published manifest — the catalog is not involved — and displays it on the plugin card, using it to flag a mismatch with the running host. It must therefore agree with the prose in the READMEs and `docs/UPGRADING.md`; changing one means changing all three. `dsh-better-sidebar` **cannot** be expressed there (it is not a `@deepseek-ai/*` peer) and lives only in that prose.
-- **Nothing in `scripts/prepare.mjs` or `scripts/build-client.mjs` may write informational text to stdout.** `prepack` runs during `npm pack` / `npm publish`, so anything it prints lands in their stdout — and `--json` requires stdout to hold nothing but JSON (measured: `built …` was enough to make `npm pack --dry-run --json` unparseable). Progress goes to stderr.
-- **Keep the READMEs' statement about what the package ships true to the tarball.** They say the npm package does not ship `docs/`, which is a real consequence for readers (those links do not resolve on npm or in the market). Stating that it ships "only the READMEs" was false — the package carries `lib/**` and `cordis.patch.yml` — and the market shows that text on the plugin's page. Verify against the real thing (`npm pack --dry-run`, or the published tarball), not against the `files` array by eye.
+- PR hướng tới nhánh `main`.
+- Tiêu đề PR là bản tóm tắt dễ hiểu về việc đã thay đổi gì và giải quyết vấn đề gì (xem mục **Tiêu đề PR** ở trên); chi tiết kỹ thuật nằm ở phần thân.
+- Người đóng góp bên ngoài đã hoàn tất việc issue được chấp nhận, tự bình luận `/assign`, được maintainer phê duyệt và gán làm assignee trước khi tạo PR; mọi issue liên kết vẫn hợp lệ và phần thân dùng các dòng đứng riêng `Fixes` / `Refs`. Chỉ quyền owner / `write` / `maintain` / `admin` theo thời gian thực mới được miễn cổng này.
+- Cả CI mã nguồn hiện có và `issue-claim-policy` đều xanh; nếu xin nhận issue muộn thì phải mở PR mới, không mở lại PR cũ.
+- Khi sửa `src/client.js` đã chạy `npm run build` để biên dịch lại trước khi kiểm chứng (tệp build không lưu trong git, không cần commit).
+- Hành vi trên các nền tảng hiện có được bảo toàn, hoặc nếu có thay đổi chủ đích thì đã giải thích rõ trong phần thân.
+- Tất cả các lệnh build và kiểm chứng đều đạt.
+- Các tệp mới thuộc mặt phát triển được đặt đúng **vị trí quy ước**: guard và kiểm thử khói đặt trong `test/`, công cụ chẩn đoán/phân tích/tạo dữ liệu thủ công đặt trong `test/tools/`, script build và phát hành đặt trong `scripts/` (xem `docs/CODE-STRUCTURE.md` §4). Guard mới cũng phải gắn đúng chuỗi (`npm run verify` mức cứng hay `npm run verify:docs` mức mềm — xem `docs/DEV-GUIDE.md`).
+- PR không chứa thông tin xác thực (credentials), tệp media cục bộ, bộ đệm sinh tự động hay các thay đổi dọn dẹp không liên quan.
+- Siêu dữ liệu gói vẫn chính xác: `engines.dsh` khớp với các README / `UPGRADING`, mô tả về thành phần trong gói ở README khớp với tarball thật, và không có script build/phát hành nào ghi văn bản thông tin ra `stdout` (xem mục **Phát hành** để hiểu vì sao từng điểm đều quan trọng).
 
-- **发布由维护者执行**（`elysia395/dsh-wallpaper-engine`）：npm 与 GitHub Releases 都由本仓发布，节奏由维护者掌握（没有自动化发布流水线）。
-- 守卫链守的是**发布面**，由 `npm run verify` 里的 `test/verify-package-publish.mjs` 负责：`lib/index.js` 的可达闭包必须被 `files` 覆盖、不得泄漏开发目录、发布文本不得带别的机器的家目录路径、`dependencies` 每条都必须被可达代码加载、安装期脚本不得引用未随包发布的文件。
-- 随时可以用 `npm pack --dry-run` 核对发布面（它的条目数会比守卫清单多 `package.json` 与 `LICENSE`）。
-- **`engines.dsh` 是宿主要求的机读副本。** 插件市场（以及 DSH 自己的插件管理 UI）是**从已发布的 manifest 直接读它**的——目录那边不参与——然后显示在插件卡片上，并用它与运行中的宿主比对、标记不匹配。所以它必须与三份 README 及 `docs/UPGRADING.md` 里的散文**同口径**：改一处就要改全部。`dsh-better-sidebar` **无法**在这里表达（它不是 `@deepseek-ai/*` peer），只能留在那段散文里。
-- **`scripts/prepare.mjs` 与 `scripts/build-client.mjs` 都不许往 stdout 写信息性文字。** `prepack` 会在 `npm pack` / `npm publish` 期间跑，它打印的东西会落进这两条命令的 stdout——而 `--json` 要求 stdout 上**只有 JSON**（实测：仅仅一行 `built …` 就让 `npm pack --dry-run --json` 无法解析）。进度信息一律走 stderr。
-- **三份 README 里"包里到底带什么"这句话必须与真实 tarball 一致。** 它们说 npm 包不带 `docs/`，这对读者是有真实后果的（那些链接在 npm 与市场里点不开）。而写成"只带三份 README"是**错的**——包里带的是 `lib/**` 与 `cordis.patch.yml`——且市场会把这句话展示在插件页上。核对要以真东西为准（`npm pack --dry-run`，或已发布的 tarball），不要凭眼睛看 `files` 数组。
+## Quy trình phát hành (dành cho maintainer)
 
-## Pull request checklist / PR 检查清单
+> Phát hành là thao tác của maintainer: mục **Bộ phát hành (Release set)** phía trên chỉ tóm tắt quy tắc, quy trình đầy đủ áp dụng theo mục này.
 
-- The PR targets `main`.
-- The PR title is a plain-language summary of what changed and why (see **PR titles** above); technical depth lives in the body.
-- External contributors completed issue acceptance, their own `/assign`, maintainer approval and assignment before PR creation; every linked issue remains eligible, and the body uses standalone `Fixes` / `Refs` lines. Only live owner / `write` / `maintain` / `admin` permission exempts this gate.
-- Existing code CI and `issue-claim-policy` are green; late claiming requires a new PR, not reopening the original.
-- `src/client.js` changes were rebuilt (`npm run build`) before running verification (the artifact is not tracked).
-- Existing platform behavior is preserved or the intentional change is explained.
-- Build and verification commands pass.
-- New dev-face files go where the layout says: guards and smoke tests in `test/`, manual
-  diagnostics/analysis/generators in `test/tools/`, build- and publish-time scripts in `scripts/`
-  (see `docs/CODE-STRUCTURE.md` §4). A new guard also has to sit in the right chain
-  (`npm run verify` vs `npm run verify:docs`) — see `docs/DEV-GUIDE.md`.
-- The PR contains no credentials, local media, generated caches, or unrelated cleanup.
-- Package metadata is still true: `engines.dsh` agrees with the READMEs / `UPGRADING`, the READMEs'
-  statement about what the package ships matches the tarball, and no build/publish script writes
-  informational text to stdout (see **Release** for why each one matters).
+Plugin này gồm **1 gói chính + 8 gói con** (xem lý do thiết kế đa gói tại [`adr/0013`](./adr/0013-bundle-multi-component-rows.md) và [`adr/0014`](./adr/0014-subpackage-contract.md)); cả 9 gói khóa đồng bộ phiên bản với nhau và gói chính khai báo 8 gói con làm **phụ thuộc chạy theo phiên bản chính xác**. Vì vậy “phát hành” không bao giờ là đăng một gói lẻ, mà là phát hành **một bộ phát hành (release set)**:
 
-- PR 目标分支为 `main`。
-- PR 标题是「改了什么、解决什么问题」的人话简述（见上面的 **PR 标题讲人话** 一节）；技术细节放在正文。
-- 外部贡献者已在 PR 创建前完成 issue 受理、本人 `/assign`、维护者批准及指派；每个关联 issue 仍合规，正文使用独立行 `Fixes` / `Refs`。仅实时 owner / `write` / `maintain` / `admin` 权限豁免此门禁。
-- 现有代码 CI 与 `issue-claim-policy` 均通过；事后补认领需新开 PR，不能重新打开原 PR。
-- 修改 `src/client.js` 时已先 `npm run build` 重建（产物不入库，无需提交）。
-- 现有平台行为已保留，或正文已解释有意变更。
-- 构建与验证命令全部通过。
-- 新增的开发面文件放在**约定位置**：守门与冒烟在 `test/`，手动诊断/分析/生成工具在 `test/tools/`，
-  构建与发布期脚本在 `scripts/`（见 `docs/CODE-STRUCTURE.md` §4）；新守卫还要挂对链
-  （硬档 `npm run verify` vs 软档 `npm run verify:docs`，见 `docs/DEV-GUIDE.md`）。
-- PR 不含凭据、本地媒体、生成缓存或无关清理。
-- 包元数据仍然属实：`engines.dsh` 与三份 README / `UPGRADING` 同口径；README 里"包里带什么"与真实
-  tarball 一致；构建与发布期脚本没有往 stdout 写信息性文字（各自为什么重要见上面的 **发布** 节）。
-## 发布流程（维护者）
-
-> 发布是维护者的操作：规则只在 `Release set / 发布集` 一节给出摘要，完整流程以本节为准。
-
-
-本插件由**一个主包 + 八个子包**组成（多包形态的取舍见 [`adr/0013`](./adr/0013-bundle-multi-component-rows.md)
-与 [`adr/0014`](./adr/0014-subpackage-contract.md)），九个包版本锁步、主包把八个子包
-声明成**精确版本运行依赖**。所以"发布"从来不是发一个包，而是发**一个发布集**：
-
-| 通道 | 用户侧入口 | 需要先满足 |
+| Kênh | Cổng vào phía người dùng | Điều kiện bắt buộc trước |
 |---|---|---|
-| npm（推荐，DSH 桌面"添加插件"直接可用） | 包名 `dsh-plugin-wallpaper-engine`（可带 `@<版本>`） | 九个包**同版本**全部在 registry 上 |
-| GitHub Release（镜像 / 离线） | 九个 tarball + `release-set.json` | Release 资产**必须是九件套**，离线安装用 `scripts/install-release.mjs` |
+| npm (khuyến nghị, dùng trực tiếp trong mục “Thêm plugin” của DSH Desktop) | Tên gói `dsh-plugin-wallpaper-engine` (có thể kèm `@<phiên bản>`) | Cả 9 gói **cùng phiên bản** đều đã có trên registry |
+| GitHub Release (mirror / ngoại tuyến) | 9 tệp tarball + `release-set.json` | Tệp đính kèm Release **bắt buộc đủ bộ 9 gói**, cài ngoại tuyến bằng `scripts/install-release.mjs` |
 
-两条通道共用同一份产物：`npm run pack:release`。
+Cả hai kênh dùng chung một nguồn sản phẩm: `npm run pack:release`.
 
 ---
 
-### 1. 为什么"只挂母包"必然失败（实测，别再试）
+### 1. Vì sao “chỉ đính kèm gói chính” chắc chắn thất bại (đã kiểm chứng thực tế, đừng thử lại)
 
-发布形态的主包 `dependencies` 里是八条裸精确版本（如 `dsh-plugin-wallpaper-engine-fx: "<版本>"`）。
-pnpm 会拿这些版本去 **registry** 解析，与"主包 tgz 从哪来"无关。在隔离 profile 上实测过：
+Trong `dependencies` của gói chính ở dạng phát hành có 8 phiên bản chính xác trần (ví dụ `dsh-plugin-wallpaper-engine-fx: "<phiên bản>"`). `pnpm` sẽ đem các phiên bản đó lên **registry** để phân giải, bất kể tệp `.tgz` của gói chính đến từ đâu. Kết quả đo thực tế trên profile cô lập:
 
 ```text
-# 探针 A：只装发布形态主包 tarball（历史样例；版本号是当时的值，不是当前版本）
+# Thử nghiệm A: chỉ cài tarball gói chính dạng phát hành (ví dụ lịch sử; số phiên bản là giá trị tại thời điểm đo, không phải phiên bản hiện tại)
 [ERR_PNPM_FETCH_404] GET https://registry.npmjs.org/dsh-plugin-wallpaper-engine-media-bridge: Not Found - 404
 This error happened while installing the dependencies of dsh-plugin-wallpaper-engine@1.3.3
 ```
 
 ```text
-# 探针 B：把九个 tarball 全部当顶层 file: 依赖一次装
+# Thử nghiệm B: cài cùng lúc cả 9 tarball dưới dạng phụ thuộc file: cấp cao nhất
 [ERR_PNPM_FETCH_404] GET https://registry.npmjs.org/dsh-plugin-wallpaper-engine-fonts: Not Found - 404
 ```
 
 ```text
-# 探针 C2：profile 的 pnpm-workspace.yaml 里写 overrides（子包名 → file:<tgz>）+ 主包 file: 依赖
+# Thử nghiệm C2: ghi overrides (tên gói con → file:<tgz>) trong pnpm-workspace.yaml của profile + cài gói chính bằng file:
 Progress: resolved 13, added 13, done            # exit 0
-ALL 8 top-level packages present; createRequire(profile/cordis.yml).resolve() OK ×8   # 示例值：探针当时的包数；现发布集为九包
+ALL 8 top-level packages present; createRequire(profile/cordis.yml).resolve() OK ×8   # Giá trị ví dụ tại thời điểm thử nghiệm; bộ phát hành hiện tại gồm 9 gói
 ```
 
-结论：
+Kết luận:
 
-- 顶层 `file:` **不能满足**传递依赖的 registry 版本范围（探针 B）⇒ "把九个 tgz 一次 `pnpm add`"不是安装办法。
-- 唯一能让离线九件套装上的机制是 profile 的 `overrides:`（探针 C2）。这也是 DSH 自己的兼容性
-  实跑走的路（`test/compat-harness-live.mjs` 的 `main()`：tarball 通道把 `overrides` 段写进 profile 的
-  `pnpm-workspace.yaml`）。
+- Phụ thuộc `file:` ở cấp cao nhất **không thỏa mãn** dải phiên bản registry của phụ thuộc bắc cầu (Thử nghiệm B) ⇒ “chạy `pnpm add` cả 9 tệp `.tgz` một lúc” không phải cách cài đặt hợp lệ.
+- Cơ chế duy nhất để cài trọn bộ 9 gói ngoại tuyến là dùng `overrides:` của profile (Thử nghiệm C2). Đây cũng là cách bài chạy tương thích thực tế của chính DSH sử dụng (hàm `main()` trong `test/compat-harness-live.mjs`: kênh tarball ghi mục `overrides` vào `pnpm-workspace.yaml` của profile).
 
 ---
 
-### 2. 发布前
+### 2. Trước khi phát hành
 
-#### 2.1 升版本（九处，锁步）
+#### 2.1 Tăng phiên bản (9 nơi, đồng bộ)
 
-根 `package.json` 与 `packages/*/package.json` 九处版本必须逐字相等，子包之间、子包对主包都不得
-声明版本依赖（`test/verify-subpackage-manifests.mjs` 会拦版本漂离）。**版本号一旦在 npm 上存在就不能
-覆盖**：`npm publish` 会以 `EPUBLISHCONFLICT` 拒绝，Release 也不该覆盖同名 tag；发布前先
-`npm view <包>@<版本> version` 确认未被占用（见 §3.2）。九处一起改完还要
-`npm install --package-lock-only --ignore-scripts` 重算锁（`test/verify-package-publish.mjs` ⑧ 逐字比
-根清单与锁的 version / 依赖规格，只改清单不重锁必红）。
+Phiên bản tại `package.json` gốc và 8 tệp `packages/*/package.json` (tổng 9 nơi) bắt buộc phải giống nhau từng ký tự; giữa các gói con với nhau và từ gói con tới gói chính không được khai báo phụ thuộc phiên bản (`test/verify-subpackage-manifests.mjs` sẽ chặn ngay nếu lệch phiên bản). **Một khi số phiên bản đã tồn tại trên npm thì không thể ghi đè**: `npm publish` sẽ từ chối với lỗi `EPUBLISHCONFLICT`, và GitHub Release cũng không nên ghi đè tag trùng tên; trước khi phát hành hãy chạy `npm view <gói>@<phiên bản> version` để xác nhận chưa bị chiếm dụng (xem §3.2). Sau khi sửa đồng loạt cả 9 nơi, phải chạy `npm install --package-lock-only --ignore-scripts` để tính lại tệp lock (`test/verify-package-publish.mjs` mục ⑧ so khớp từng ký tự version / đặc tả phụ thuộc giữa manifest gốc và tệp lock — chỉ sửa manifest mà không cập nhật lock sẽ báo đỏ).
 
-#### 2.2 生成发布集
+#### 2.2 Tạo bộ phát hành
 
 ```sh
-npm run pack:release                      # → .test-cache/release/set-<随机>/（九个 tgz + release-set.json）
-npm run pack:release -- --output <目录>    # 指定输出目录
+npm run pack:release                      # → .test-cache/release/set-<ngẫu nhiên>/ (9 tệp tgz + release-set.json)
+npm run pack:release -- --output <thư mục> # Chỉ định thư mục đầu ra
 ```
 
-产物体积随版本变化，不在文档里记数：打包后用 `npm pack --dry-run` 看清单，或对
-`.test-cache/release/set-<随机>/` 下的 tgz 直接 `ls -l` 现场看。`release-set.json` 的
-`publishOrder` 即发布顺序：**八个子包在前，主包最后**。
+Dung lượng sản phẩm thay đổi theo phiên bản nên không ghi cứng trong tài liệu: sau khi đóng gói hãy dùng `npm pack --dry-run` để xem danh sách tệp, hoặc chạy `ls -l` trực tiếp trên các tệp `.tgz` trong `.test-cache/release/set-<ngẫu nhiên>/`. Trường `publishOrder` trong `release-set.json` chính là thứ tự phát hành: **8 gói con trước, gói chính cuối cùng**.
 
-`pack:release` 只打包、绝不发布；源码根目录直接 `npm pack` 得到的是**开发清单**（带 scripts 与
-devDependencies，`files` 不含子包），不能当发布集用。
+`pack:release` chỉ đóng gói, tuyệt đối không publish; còn chạy `npm pack` trực tiếp ở thư mục gốc sẽ cho ra **manifest phát triển** (chứa `scripts` và `devDependencies`, `files` không gồm gói con), không thể dùng làm bộ phát hành.
 
-#### 2.3 发布集自检（硬档守卫）
+#### 2.3 Tự kiểm tra bộ phát hành (guard mức cứng)
 
 ```sh
 node test/verify-release-set.mjs
 ```
 
-它真打一次包、解开九个 tarball 的字节，判四件事（五条负对照共用同一判据）：
+Script sẽ đóng gói thật một lần, giải nén từng byte của 9 tarball và kiểm tra 4 điều (5 ca đối chứng âm dùng chung cùng bộ tiêu chí):
 
-1. 发布集 = 主包 + 仓库里每个子包各一个，名字与版本与源码清单逐字相等，主包在最后；
-2. 主包 tarball 的 `dependencies` 里八个子包值 = 子包真实版本、**不带 `^`/`~`/`*`**，且不多不少；
-3. 主包 tarball 不带 `packages/` `src/` `test/` `scripts/` `docs/` 等开发面目录，但必须有
-   `lib/subpackage-boot.js` 与 `cordis.patch.yml`；
-4. 每个子包 tarball 都有 `lib/index.js`、`cordis.patch.yml`，声明 `dsh.client` 的还必须有
-   `exports['./client']` 指向的那个文件。
+1. Bộ phát hành = 1 gói chính + mỗi gói con trong kho đúng 1 gói, tên và phiên bản khớp từng ký tự với manifest mã nguồn, gói chính đứng cuối;
+2. Mục `dependencies` trong tarball gói chính chứa đúng 8 gói con với giá trị bằng đúng phiên bản thật của từng gói con, **không có `^`/`~`/`*`**, không thừa không thiếu;
+3. Tarball gói chính không chứa các thư mục phát triển như `packages/`, `src/`, `test/`, `scripts/`, `docs/`, nhưng bắt buộc phải có `lib/subpackage-boot.js` và `cordis.patch.yml`;
+4. Mỗi tarball gói con đều có `lib/index.js`, `cordis.patch.yml`, và những gói khai báo `dsh.client` bắt buộc phải có tệp mà `exports['./client']` trỏ tới.
 
 ---
 
-### 3. 通道 A：npm（DSH 桌面"添加插件"可用）
+### 3. Kênh A: npm (dùng được ngay trong mục “Thêm plugin” của DSH Desktop)
 
-#### 3.1 发布（严格按 `publishOrder`）
+#### 3.1 Phát hành (tuân thủ nghiêm ngặt `publishOrder`)
 
 ```sh
 set_dir=.test-cache/release/set-XXXXXX
-# 1) 八个子包
+# 1) Phát hành 8 gói con trước
 for f in $(node -e "console.log(require('./$set_dir/release-set.json').publishOrder.slice(0,-1).join(' '))"); do
   npm publish "$set_dir/$f" --access public
 done
-# 2) 全部成功后再发主包
+# 2) Chỉ sau khi cả 8 gói con đều thành công mới phát hành gói chính
 npm publish "$set_dir/$(node -e "const s=require('./$set_dir/release-set.json');console.log(s.publishOrder.at(-1))")" --access public
 ```
 
-Windows PowerShell 等价写法见 §5 的脚本片段（Git Bash 不可用时）。
+Xem đoạn lệnh PowerShell tương đương cho Windows ở mục §5 (khi không có Git Bash).
 
-#### 3.2 为什么要"先子后主、且中间不中断"
+#### 3.2 Vì sao phải “gói con trước, gói chính sau và không ngắt quãng”
 
-主包先发而某个子包没发 = **灾难路径**：用户 `pnpm add dsh-plugin-wallpaper-engine` 会在安装期
-以 `ERR_PNPM_FETCH_404` 失败并整体回滚。DSH 会把这类失败分类成 `not-found` 并在 UI 上报错，用户
-看到的是"这个插件装不上"。已发布的主包**不能**靠重发同版本修好（同版本不可覆盖）——只能补发子包
-（补发后立刻恢复可用），或升版本重发主包。
+Phát hành gói chính trước khi đủ gói con là **kịch bản thảm họa**: người dùng chạy `pnpm add dsh-plugin-wallpaper-engine` sẽ gặp lỗi `ERR_PNPM_FETCH_404` ngay lúc cài và bị rollback toàn bộ. DSH phân loại lỗi này là `not-found` rồi báo lỗi trên giao diện, khiến người dùng thấy “plugin này không cài được”. Gói chính đã đăng **không thể** sửa bằng cách đăng đè lại cùng phiên bản (không được ghi đè cùng version) — chỉ có thể đăng bù các gói con còn thiếu (đăng bù xong là khôi phục dùng được ngay), hoặc tăng phiên bản rồi phát hành lại gói chính.
 
-发布前先 `npm view <每个包>@<版本> version` 确认九个包都还没被占用；中断后恢复时只补发缺的。
+Trước khi đăng hãy chạy `npm view <từng gói>@<phiên bản> version` để chắc chắn cả 9 gói đều chưa bị chiếm; nếu bị gián đoạn giữa chừng thì khi khôi phục chỉ đăng bù những gói còn thiếu.
 
-#### 3.3 发布后自证（三步都要过）
+#### 3.3 Tự kiểm chứng sau phát hành (bắt buộc qua cả 3 bước)
 
 ```sh
-# ① registry 上九个版本都在（VERSION 换成本次发布版本）
-VERSION=<本次版本>
+# ① Xác nhận cả 9 phiên bản đều đã có trên registry (thay VERSION bằng phiên bản vừa phát hành)
+VERSION=<phiên bản lần này>
 for p in dsh-plugin-wallpaper-engine dsh-plugin-wallpaper-engine-{about-notice,fonts,fx,glass,mascot-avatar,media-bridge,parallax,pet-link}; do
   npm view "$p@$VERSION" version || echo "MISSING $p"
 done
 ```
 
 ```sh
-# ② 空白 profile 真装一次（子包必须由 registry 解析出来，而不是本机残留）
+# ② Cài thật trên một profile trống (các gói con phải được phân giải từ registry, không phải tàn dư cục bộ)
 mkdir -p /tmp/rel-check && cd /tmp/rel-check
 printf '{"name":"rel-check","private":true,"version":"0.0.0"}\n' > package.json
 printf 'packages:\n  - .\nnodeLinker: hoisted\nautoInstallPeers: false\n' > pnpm-workspace.yaml
@@ -527,64 +348,54 @@ node -e "const{createRequire}=require('node:module');const r=createRequire(proce
 ```
 
 ```sh
-# ③ DSH 桌面端到端：新建 profile → 添加插件 → 贴包名 → 装完后确认九个目录都在
+# ③ Kiểm thử end-to-end trên DSH Desktop: tạo profile mới → Thêm plugin → dán tên gói → sau khi cài xong xác nhận đủ 9 thư mục
 ls "<DSH_HOME>/profiles/<profile>/node_modules" | grep dsh-plugin-wallpaper-engine
 ```
 
-#### 3.4 npmmirror 镜像
+#### 3.4 Đồng bộ mirror npmmirror
 
-DSH 安装源可选 `registry.npmjs.org` / `registry.npmmirror.com` / 自定义。镜像**异步同步**：主包先被
-镜像、子包还没到时，选镜像源的用户会撞探针 A 那种 404。发布后逐个确认
-`https://registry.npmmirror.com/<包名>/<版本>` 返回 200，再对外宣布版本可用。
+Nguồn cài đặt của DSH có thể chọn `registry.npmjs.org` / `registry.npmmirror.com` / nguồn tùy chỉnh. Mirror **đồng bộ bất đồng bộ**: nếu gói chính đã lên mirror trước trong khi gói con chưa kịp về, người dùng chọn mirror sẽ dính lỗi 404 giống Thử nghiệm A. Sau khi publish, hãy kiểm tra từng gói tại `https://registry.npmmirror.com/<tên gói>/<phiên bản>` đều trả về HTTP 200 rồi mới công bố rộng rãi phiên bản mới.
 
 ---
 
-### 4. 通道 B：GitHub Release（镜像与离线安装）
+### 4. Kênh B: GitHub Release (mirror và cài đặt ngoại tuyến)
 
-#### 4.1 资产必须是九件套 + 清单
+#### 4.1 Tệp đính kèm bắt buộc đủ bộ 9 gói + manifest
 
 ```sh
-# VERSION 与 §3.3 同一个值
-VERSION=<本次版本>
+# VERSION giống với giá trị ở §3.3
+VERSION=<phiên bản lần này>
 gh release create "v$VERSION" \
   .test-cache/release/set-XXXXXX/*.tgz \
   .test-cache/release/set-XXXXXX/release-set.json \
   --title "v$VERSION" --notes-file docs/CHANGELOG.md
 ```
 
-选配 `SHA256SUMS.txt`（`sha256sum *.tgz > SHA256SUMS.txt`）。**不要**只挂主包 tgz —— 那是一个装不上的
-包（§1 探针 A）。Release 只是 npm 的镜像：同一批字节、同一个版本。
+Có thể đính kèm thêm `SHA256SUMS.txt` (`sha256sum *.tgz > SHA256SUMS.txt`). **Tuyệt đối không** chỉ đính kèm riêng tệp `.tgz` của gói chính — đó là một gói không thể cài đặt (§1 Thử nghiệm A). Release chỉ là bản sao mirror của npm: cùng lô byte, cùng phiên bản.
 
-#### 4.2 离线安装（走 overrides，不走 `pnpm add` 单文件）
+#### 4.2 Cài đặt ngoại tuyến (đi qua `overrides`, không dùng `pnpm add` đơn lẻ)
 
 ```sh
-node scripts/install-release.mjs --set <解包的发布集目录> --profile web --dsh-home <DSH_HOME> --app-closed
-node scripts/install-release.mjs ... --dry-run     # 只打印将要写入的 overrides
+node scripts/install-release.mjs --set <thư mục bộ phát hành đã giải nén> --profile web --dsh-home <DSH_HOME> --app-closed
+node scripts/install-release.mjs ... --dry-run     # Chỉ in các dòng overrides sẽ ghi mà không thay đổi tệp
 ```
 
-它做四件事：校验发布集（清单 ↔ tarball 一一对应、主包在最后）→ 备份 profile 的 `package.json` 与
-`pnpm-workspace.yaml` → 把八条 `overrides`（子包名 → 同目录 tgz）写进 `pnpm-workspace.yaml` 并补上
-`nodeLinker: hoisted` / `autoInstallPeers: false` → `dsh plugin add <主包 tgz>`，最后逐个
-`require.resolve` 自证九个包（含 `dsh.client` 的 `./client` 入口）与版本。
+Script thực hiện 4 việc: kiểm tra bộ phát hành (manifest ↔ tarball khớp 1-1, gói chính đứng cuối) → sao lưu `package.json` và `pnpm-workspace.yaml` của profile → ghi 8 dòng `overrides` (tên gói con → tệp `.tgz` cùng thư mục) vào `pnpm-workspace.yaml` kèm `nodeLinker: hoisted` / `autoInstallPeers: false` → chạy `dsh plugin add <tgz gói chính>`, cuối cùng tự chạy `require.resolve` cho từng gói trong cả 9 gói (gồm cả điểm vào `./client` của các gói có `dsh.client`) và kiểm tra phiên bản.
 
-边界：profile 里**已有** `overrides:` 时脚本拒绝执行并打印要手工合并的行（两份 override 的交集不可
-自动合并）；它不发布、不改版本。
+Ranh giới: nếu profile **đã có sẵn** mục `overrides:`, script sẽ từ chối thực thi và in ra các dòng cần hợp nhất thủ công (không thể tự động gộp phần giao của hai tập override); script không phát hành và không sửa phiên bản.
 
-#### 4.3 为什么不能指望 DSH UI 直接吃 Release 的 tgz
+#### 4.3 Vì sao không thể trông chờ giao diện DSH UI ăn trực tiếp `.tgz` từ Release
 
-DSH 插件管理器只执行 `pnpm add <spec>`（`parseInstallSpec` 接受 registry 包名 / git / tarball 路径 /
-本地目录）。贴主包 tgz → 探针 A；贴九个 tgz 也不会一次装（管理器要求这次 add **恰好改变一个**依赖，
-否则抛 `ambiguous-install`，而且顶层 `file:` 仍不满足传递范围）。所以离线九件套必须由脚本先把
-overrides 落到 profile，再由管理器执行安装。
+Trình quản lý plugin của DSH chỉ thực thi `pnpm add <spec>` (`parseInstallSpec` chấp nhận tên gói registry / git / đường dẫn tarball / thư mục cục bộ). Dán tệp `.tgz` của gói chính → rơi vào Thử nghiệm A; dán cả 9 tệp `.tgz` cũng không cài được cùng lúc (trình quản lý yêu cầu mỗi lần add **làm thay đổi đúng một** phụ thuộc, nếu không sẽ báo `ambiguous-install`, hơn nữa `file:` cấp cao nhất vẫn không thỏa dải phiên bản bắc cầu). Vì vậy với bộ 9 gói ngoại tuyến, bắt buộc phải dùng script ghi `overrides` xuống profile trước rồi mới để trình quản lý tiến hành cài đặt.
 
 ---
 
-### 5. PowerShell 版发布片段（Windows 本机）
+### 5. Đoạn lệnh phát hành bằng PowerShell (Windows bản địa)
 
 ```powershell
 $set = ".test-cache\release\set-XXXXXX"
 $index = Get-Content "$set\release-set.json" -Raw | ConvertFrom-Json
-$env:npm_config_cache = "$PWD\.test-cache\npm-cache"   # 沙箱/受限环境下默认缓存在 workspace 外会 EPERM
+$env:npm_config_cache = "$PWD\.test-cache\npm-cache"   # Trong môi trường sandbox/hạn chế quyền, cache mặc định ngoài workspace có thể gặp EPERM
 foreach ($file in $index.publishOrder) {
   npm publish "$set\$file" --access public
   if ($LASTEXITCODE -ne 0) { throw "publish failed: $file" }
@@ -593,31 +404,30 @@ foreach ($file in $index.publishOrder) {
 
 ---
 
-### 6. 失败处理
+### 6. Xử lý sự cố
 
-| 症状 | 含义 | 处理 |
+| Triệu chứng | Ý nghĩa | Cách xử lý |
 |---|---|---|
-| `EPUBLISHCONFLICT` | 该版本已存在 | 不能覆盖；补发其它包，或升版本整组重发 |
-| 子包发到一半中断 | 主包若已发 = 用户装不上 | 先补发缺的子包（立刻恢复），不要动已发版本 |
-| 用户装完只有主包 / 报 404 | 该版本子包缺失或镜像未同步 | `npm view` 查缺哪个；补发或等镜像同步 |
-| `ERR_PNPM_MISSING_TARBALL_INTEGRITY` | pnpm 11.0–11.8 在 hoisted 下对裸 URL 无 integrity | 用 11.9+（实测备注：本机 11.22.0 正常，仅作参考、不是版本要求）；离线装走 `install-release.mjs` |
-| DSH 报 `ambiguous-install` | 一次 add 改变了多个依赖 | 一次只装一个 spec；九件套用脚本 |
-| 装完界面出现重复行 | 子包被单独选成 bundle | 只选主包（`retainMainBundle` 逻辑，脚本已自动处理） |
+| `EPUBLISHCONFLICT` | Phiên bản này đã tồn tại | Không thể ghi đè; đăng bù các gói còn lại, hoặc tăng phiên bản rồi phát hành lại cả bộ |
+| Đang đăng dở các gói con thì gián đoạn | Nếu gói chính đã đăng thì người dùng sẽ không cài được | Đăng bù ngay các gói con còn thiếu (khôi phục lập tức), không đụng vào phiên bản đã đăng |
+| Người dùng cài xong chỉ có gói chính / báo 404 | Thiếu gói con ở phiên bản đó hoặc mirror chưa đồng bộ | Dùng `npm view` kiểm tra gói nào thiếu; đăng bù hoặc chờ mirror đồng bộ xong |
+| `ERR_PNPM_MISSING_TARBALL_INTEGRITY` | pnpm 11.0–11.8 ở chế độ hoisted không có integrity cho URL trần | Dùng pnpm 11.9+ (ghi chú thực nghiệm: máy thử 11.22.0 hoạt động bình thường, chỉ mang tính tham khảo chứ không phải yêu cầu phiên bản); cài ngoại tuyến dùng `install-release.mjs` |
+| DSH báo `ambiguous-install` | Một lệnh add làm thay đổi nhiều hơn một phụ thuộc | Mỗi lần chỉ cài một spec; với bộ 9 gói hãy dùng script |
+| Cài xong giao diện xuất hiện các hàng bị trùng | Gói con bị chọn riêng làm bundle | Chỉ chọn gói chính (logic `retainMainBundle`, script đã tự động xử lý) |
 
-回滚：用 `npm deprecate <包>@<版本> "原因"` 宣告，**不要** `npm unpublish`；GitHub Release 可标记为
-`--prerelease` 或删资产，但已发布到 npm 的版本不可撤回。
+Khôi phục (rollback): dùng `npm deprecate <gói>@<phiên bản> "lý do"` để thông báo ngừng dùng, **không** chạy `npm unpublish`; trên GitHub Release có thể đánh dấu `--prerelease` hoặc xóa tệp đính kèm, nhưng phiên bản đã đăng lên npm không thể thu hồi.
 
 ---
 
-### 7. 发布检查表
+### 7. Bảng kiểm phát hành
 
-- [ ] 九处版本锁步提升，`grep -r '"version"' package.json packages/*/package.json` 全一致
-- [ ] `npm run verify` 全绿（含 `test/verify-release-set.mjs`）
-- [ ] `npm run pack:release`，确认九个 tgz + `release-set.json`
-- [ ] 按 `publishOrder` 发八个子包 → 发主包
-- [ ] `npm view` 九个版本全部可查
-- [ ] 空白 profile 真装 + 九个 `require.resolve`
-- [ ] npmmirror 九个版本全部 200
-- [ ] DSH 桌面新建 profile 端到端装一次
-- [ ] GitHub Release 挂**九件套**（+ `release-set.json`/`SHA256SUMS.txt`）
-- [ ] Release notes 写明"从源码装见 CONTRIBUTING §2 / 离线安装见本文 §4.2"
+- [ ] Tăng đồng bộ phiên bản ở cả 9 nơi, `grep -r '"version"' package.json packages/*/package.json` khớp hoàn toàn
+- [ ] `npm run verify` xanh toàn bộ (bao gồm `test/verify-release-set.mjs`)
+- [ ] Chạy `npm run pack:release`, xác nhận đủ 9 tệp `.tgz` + `release-set.json`
+- [ ] Phát hành theo `publishOrder`: 8 gói con trước → gói chính sau cùng
+- [ ] `npm view` tra cứu được đầy đủ cả 9 phiên bản
+- [ ] Cài thật trên một profile trống + vượt qua đủ 9 lần `require.resolve`
+- [ ] Cả 9 phiên bản trên npmmirror đều trả về HTTP 200
+- [ ] Tạo profile mới trên DSH Desktop và cài thử end-to-end một lần
+- [ ] GitHub Release đính kèm đủ **bộ 9 gói** (+ `release-set.json` / `SHA256SUMS.txt`)
+- [ ] Ghi chú phát hành (Release notes) nêu rõ “Cài từ mã nguồn xem CONTRIBUTING §2 / Cài ngoại tuyến xem mục §4.2 trong cùng tài liệu”
