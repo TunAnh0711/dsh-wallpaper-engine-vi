@@ -12,14 +12,16 @@
  */
 
 // 项目仓库（README / package.json 的同一条地址）：关于页的按钮与可复制文本都用它。
-const ABOUT_REPO_URL = "https://github.com/elysia395/dsh-wallpaper-engine";
+const ABOUT_REPO_URL = "https://github.com/TunAnh0711/dsh-wallpaper-engine-vi";
 
 // 两张二维码的**路由路径**（相对 BASE，交给 apiUrl 拼前缀）：
 //   · QQ 群「DSHWE | LLM 讨论群」     → lib/about/qq-group.png
 //   · 抖音群「dsh 交流群」            → lib/about/douyin-group.png
+//   · 越南语版作者赞赏码              → lib/about/donate-vi.jpg
 // 文件名与 packages/about-notice/lib/routes/about-qr.js 的白名单**逐字相同**（守卫两边对账）。
 const ABOUT_QR_QQ_PATH = "/about-qr/qq-group.png";
 const ABOUT_QR_DOUYIN_PATH = "/about-qr/douyin-group.png";
+const ABOUT_QR_DONATE_PATH = "/about-qr/donate-vi.jpg";
 
 // 「更新公告」一次弹窗的配图（v1.3.0 起：GitHub 求星插画，JPEG 720×720）：
 //   · 派生自 assets/about/update-notice-star-1254x1254.png（缩到 720px、JPEG q88）
@@ -31,5 +33,6 @@ export {
   ABOUT_REPO_URL,
   ABOUT_QR_QQ_PATH,
   ABOUT_QR_DOUYIN_PATH,
+  ABOUT_QR_DONATE_PATH,
   NOTICE_ART_PATH,
 };

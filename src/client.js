@@ -3062,6 +3062,7 @@ function onFpsCap(cap) {
 }
 function onFlip(e) { setSetting("flip", e.target.checked); emit(); }
 function onAdapterTarget(e) { setSetting("adapterTarget", e.target.value); emit(); }
+function onUiLanguage(e) { const v = e.target.value; setSetting("uiLanguage", v); weSetUiLanguage(v); emit(); }
 function onPauseOnHidden(e) { setSetting("pauseOnHidden", e.target.checked); emit(); }
 function onPauseOnBlur(e) { setSetting("pauseOnBlur", e.target.checked); emit(); }
 function onPauseOnBattery(e) { setSetting("pauseOnBattery", e.target.checked); emit(); }
@@ -5182,7 +5183,7 @@ function WallpaperPicker() {
       }),
       renderAdvancedTab({
         setSetting, setTransient,
-        onAdapterTarget, onEdgeCompatChange, onLayoutChange, onPauseOnBattery, onPauseOnBlur, onPauseOnHidden, onToggleLiveDiag, onStartPaused, sel,
+        onAdapterTarget, onUiLanguage, onEdgeCompatChange, onLayoutChange, onPauseOnBattery, onPauseOnBlur, onPauseOnHidden, onToggleLiveDiag, onStartPaused, sel,
         onStartEditCacheDir, onCancelEditCacheDir, onCacheDirDraft,
         onCacheDirBrowseInput, onCacheDirBrowseGo, onCacheDirBrowseEnter, onCacheDirBrowseUp, onPickCacheDir, onCloseCacheDirBrowse,
       }),
@@ -5806,6 +5807,7 @@ function apply(ctx) {
   //    缺服务时静默停在默认语言，见 src/i18n/i18n.js）。放在最前面：界面首次渲染就要按当前
   //    语言取词；服务通常已在（dsh-web-app 的 base bundle 自带），轮询只是兜底。
   if (ctx.effect) ctx.effect(() => weI18nAttach(ctx) || undefined);
+  weSetUiLanguage(selection.uiLanguage);
 
   // 0b. 启动预取（字体集清单）：与设置无关，启动链却要等 settings 之后才发 —— 这里先发，
   //     链走到它时通常已经回来（只预取一次；失败不影响启动链）。

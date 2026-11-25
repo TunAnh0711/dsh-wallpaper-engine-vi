@@ -54,9 +54,10 @@ const INLINE_MODULES = [
     // 纯数据、零依赖 ⇒ 放最前：后面任何模块都能直接读（也不可能有 TDZ 交互）。
     file: 'src/about-assets.js',
     why: '「关于」页签与更新公告的静态数据：仓库地址 + 随包图的路由路径（图本体在 lib/about/，见 lib/routes/about-qr.js 白名单）',
-    markers: ['const ABOUT_REPO_URL = "https://github.com/elysia395/dsh-wallpaper-engine"',
+    markers: ['const ABOUT_REPO_URL = "https://github.com/TunAnh0711/dsh-wallpaper-engine-vi"',
       'const ABOUT_QR_QQ_PATH = "/about-qr/qq-group.png"',
       'const ABOUT_QR_DOUYIN_PATH = "/about-qr/douyin-group.png"',
+      'const ABOUT_QR_DONATE_PATH = "/about-qr/donate-vi.jpg"',
       'const NOTICE_ART_PATH = "/about-qr/update-notice.jpg"'],
   },
   {
@@ -113,6 +114,51 @@ const INLINE_MODULES = [
     file: 'src/i18n/i18n-copy.js',
     why: '英文词表的**组装点** + 宿主显示表（域模块在前，这里只展开组装；两张表的键集各由 verify-i18n 双向对账）',
     markers: ['const WE_I18N_EN = {', 'const WE_I18N_HOST_EN = {'],
+  },
+  {
+    file: 'src/i18n/i18n-vi-core.js',
+    why: '越南语词表域：客户端外壳',
+    markers: ['const WE_I18N_VI_CORE = {'],
+  },
+  {
+    file: 'src/i18n/i18n-vi-font.js',
+    why: '越南语词表域：字体与配色',
+    markers: ['const WE_I18N_VI_FONT = {'],
+  },
+  {
+    file: 'src/i18n/i18n-vi-live.js',
+    why: '越南语词表域：实时层与素材预处理',
+    markers: ['const WE_I18N_VI_LIVE = {'],
+  },
+  {
+    file: 'src/i18n/i18n-vi-panel.js',
+    why: '越南语词表域：设置面板页签',
+    markers: ['const WE_I18N_VI_PANEL = {'],
+  },
+  {
+    file: 'src/i18n/i18n-vi-picker.js',
+    why: '越南语词表域：壁纸选择器与快捷面板',
+    markers: ['const WE_I18N_VI_PICKER = {'],
+  },
+  {
+    file: 'src/i18n/i18n-vi-ext.js',
+    why: '越南语词表域：扩展页签 · 关于页签 · 更新公告',
+    markers: ['const WE_I18N_VI_EXT = {'],
+  },
+  {
+    file: 'src/i18n/i18n-vi-glass.js',
+    why: '越南语词表域：玻璃预设与外观细项',
+    markers: ['const WE_I18N_VI_GLASS = {'],
+  },
+  {
+    file: 'src/i18n/i18n-vi-pet-link.js',
+    why: '越南语词表域：桌宠联动',
+    markers: ['const WE_I18N_VI_PET_LINK = {'],
+  },
+  {
+    file: 'src/i18n/i18n-vi.js',
+    why: '越南语词表组装点 + 宿主显示表（默认语言）',
+    markers: ['const WE_I18N_VI = {', 'const WE_I18N_HOST_VI = {'],
   },
   {
     file: 'src/i18n/i18n.js',
@@ -352,7 +398,7 @@ const INLINE_MODULES = [
   {
     file: 'src/panel-tabs/advanced.js',
     why: '「系统」页签的六个节渲染器（从 src/panel-tabs.js 按域拆出）',
-    markers: ['function renderAdvancedBrowsingSection(ctx) {', '    const { onLayoutChange, sel } = ctx;'],
+    markers: ['function renderAdvancedBrowsingSection(ctx) {', '    const { onLayoutChange, onUiLanguage, sel } = ctx;'],
   },
   {
     file: 'src/panel-tabs.js',

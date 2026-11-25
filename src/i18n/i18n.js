@@ -54,15 +54,31 @@ const WE_LANG_PARAM = "we-lang";
 
 /** 无语言服务时的默认语言：保持本插件的历史行为（界面是中文）。 */
 const WE_I18N_DEFAULT_LOCALE = "zh";
+const WE_UI_LANGUAGE_MODES = new Set(["vi", "en", "zh", "auto"]);
 
 let weLocaleService = null;   // 已接入的官方 LocaleRuntime（缺席 = null）
 let weLocaleActive = WE_I18N_DEFAULT_LOCALE;
+let weUiLanguageMode = "auto"; // 插件界面语言模式：vi / en / zh / auto（由 client 启动时按设置切换为 vi）
 let weLocaleRevision = 0;
 const weLocaleListeners = new Set();
 
 /** 中文判定：`zh` / `zh-CN` / `zh-Hans` 一律算中文（与官方 localeKey 无关，只看前缀）。 */
 function weLocaleIsZh(id) {
   return String(id || "").toLowerCase().startsWith("zh");
+}
+
+/** 越南语判定：`vi` / `vi-VN` 一律算越南语。 */
+function weLocaleIsVi(id) {
+  return String(id || "").toLowerCase().startsWith("vi");
+}
+
+/** 同步当前有效语言到文档根属性，供 pet-link 等子包无耦合读取。 */
+function weSyncDocLang(id) {
+  try {
+    if (typeof document !== "undefined" && document && document.documentElement && document.documentElement.dataset) {
+      document.documentElement.dataset.weLang = String(id || "");
+    }
+  } catch { /* non-DOM sandbox */ }
 }
 
 /**
@@ -94,8 +110,24 @@ function weLangOverride() {
 function weLocaleId() {
   const override = weLangOverride();
   if (override !== null) return override;
+  if (weUiLanguageMode !== "auto") return weUiLanguageMode;
   if (weLocaleService !== null) return weLocaleActive;
   return WE_I18N_DEFAULT_LOCALE;
+}
+
+/** 切换插件界面语言模式（vi / en / zh / auto）并通知所有订阅者重渲染。 */
+function weSetUiLanguage(mode) {
+  const next = WE_UI_LANGUAGE_MODES.has(mode) ? mode : "vi";
+  const prevEffective = weLocaleId();
+  weUiLanguageMode = next;
+  const nextEffective = weLocaleId();
+  weSyncDocLang(nextEffective);
+  if (nextEffective !== prevEffective) {
+    weLocaleRevision += 1;
+    for (const fn of Array.from(weLocaleListeners)) {
+      try { fn(); } catch { /* ignore */ }
+    }
+  }
 }
 
 /** 修订号：语言切换 / 词表注册都 +1（uSES 的快照值，必须稳定可比）。 */
@@ -119,6 +151,7 @@ function weOnLocaleChange(fn) {
 function weLocalePublish(nextActive, force) {
   const changed = force === true || nextActive !== weLocaleActive;
   if (nextActive !== weLocaleActive) weLocaleActive = nextActive;
+  weSyncDocLang(weLocaleId());
   if (!changed) return;
   weLocaleRevision += 1;
   for (const fn of Array.from(weLocaleListeners)) {
@@ -162,23 +195,33 @@ function weI18nInterpolate(template, params) {
  */
 function weT(key, params, context) {
   const full = weI18nKey(key, context);
-  // 服务在场走它自己的链路（含语言包 fallback 与 `{name}` 插值）；缺席走本地等价实现。
-  if (weLocaleService !== null && weLangOverride() === null && typeof weLocaleService.bind === "function") {
+  // 跟随宿主模式且服务在场时走官方链路；显式语言或 ?we-lang 覆盖时走本地词表。
+  if (weUiLanguageMode === "auto" && weLocaleService !== null && weLangOverride() === null && typeof weLocaleService.bind === "function") {
     try {
       const bound = weLocaleService.bind(WE_I18N_NS);
       if (typeof bound === "function") return bound(full, params);
     } catch { /* 服务异常：落到本地实现，绝不因取词抛错 */ }
   }
   const id = weLocaleId();
+  const src = weI18nKeySource(full);
   let out;
   if (weLocaleIsZh(id)) {
-    out = weI18nKeySource(full);
+    out = src;
+  } else if (weLocaleIsVi(id)) {
+    const viDict = typeof WE_I18N_VI !== "undefined" ? WE_I18N_VI : null;
+    const hostVi = typeof WE_I18N_HOST_VI !== "undefined" ? WE_I18N_HOST_VI : null;
+    out = (viDict && viDict[full] !== undefined) ? viDict[full]
+      : (hostVi && hostVi[full] !== undefined) ? hostVi[full]
+        : (viDict && viDict[src] !== undefined) ? viDict[src]
+          : (hostVi && hostVi[src] !== undefined) ? hostVi[src]
+            : (WE_I18N_EN[full] !== undefined ? WE_I18N_EN[full]
+              : WE_I18N_HOST_EN[full] !== undefined ? WE_I18N_HOST_EN[full] : src);
   } else {
     const en = WE_I18N_EN[full] !== undefined ? WE_I18N_EN[full]
       : WE_I18N_HOST_EN[full] !== undefined ? WE_I18N_HOST_EN[full]
-        : WE_I18N_EN[weI18nKeySource(full)] !== undefined ? WE_I18N_EN[weI18nKeySource(full)]
-          : WE_I18N_HOST_EN[weI18nKeySource(full)] !== undefined ? WE_I18N_HOST_EN[weI18nKeySource(full)]
-            : weI18nKeySource(full);
+        : WE_I18N_EN[src] !== undefined ? WE_I18N_EN[src]
+          : WE_I18N_HOST_EN[src] !== undefined ? WE_I18N_HOST_EN[src]
+            : src;
     out = en;
   }
   return weI18nInterpolate(out, params);
@@ -195,6 +238,15 @@ function weI18nZhDict() {
 /** 英文词表（客户端 + 宿主两份合并后的**注册形态**；官方注册表按命名空间只收一份）。 */
 function weI18nEnDict() {
   return Object.assign({}, WE_I18N_EN, WE_I18N_HOST_EN);
+}
+
+/** 越南语词表（客户端 + 宿主合并）。 */
+function weI18nViDict() {
+  return Object.assign(
+    {},
+    typeof WE_I18N_VI !== "undefined" ? WE_I18N_VI : {},
+    typeof WE_I18N_HOST_VI !== "undefined" ? WE_I18N_HOST_VI : {},
+  );
 }
 
 /**
@@ -234,7 +286,12 @@ function weI18nAttach(ctx) {
     try {
       const offZh = service.register(WE_I18N_NS, "zh", weI18nZhDict());
       const offEn = service.register(WE_I18N_NS, "en", weI18nEnDict());
-      offDicts = () => { try { offZh(); } catch { /* ignore */ } try { offEn(); } catch { /* ignore */ } };
+      const offVi = service.register(WE_I18N_NS, "vi", weI18nViDict());
+      offDicts = () => {
+        try { offZh(); } catch { /* ignore */ }
+        try { offEn(); } catch { /* ignore */ }
+        try { offVi(); } catch { /* ignore */ }
+      };
     } catch { offDicts = null; /* 注册被拒（命名空间被占）：取词仍走本地实现 */ }
     if (typeof service.subscribe === "function") {
       try { offSub = service.subscribe(sync); } catch { offSub = null; }
@@ -278,6 +335,7 @@ function useWeLocale() {
 }
 
 export {
+  weSetUiLanguage,
   weLocaleRevisionValue,
   weLocaleSubscribe,
   weOnLocaleChange,

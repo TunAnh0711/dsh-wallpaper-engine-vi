@@ -4,8 +4,28 @@
  * 本节渲染器从 src/panel-tabs.js 按域搬出，函数体逐字未改；内联顺序见 scripts/build-client.mjs（排在组装点之前）。
  */
   function renderAdvancedBrowsingSection(ctx) {
-    const { onLayoutChange, sel } = ctx;
+    const { onLayoutChange, onUiLanguage, sel } = ctx;
+    const uiLang = (typeof UI_LANGUAGE_VALUES !== "undefined" && UI_LANGUAGE_VALUES.includes(sel.uiLanguage))
+      ? sel.uiLanguage : "vi";
     return React.createElement(React.Fragment, null,
+    // ── 界面语言：默认越南语，可切换 English / 中文 / 跟随 DSH ──
+    React.createElement("div", { className: "we-picker__section" },
+      React.createElement("div", { className: "we-picker__ctl" },
+        ctlText(weT("界面语言"), weT("立即生效 · 持久保存"),
+          weT("切换插件界面显示语言（默认越南语；选「跟随 DSH」时同步宿主语言）")),
+        React.createElement("select", {
+          className: "we-picker__select",
+          value: uiLang,
+          onChange: onUiLanguage,
+          "aria-label": weT("界面语言"),
+        },
+          React.createElement("option", { value: "vi" }, "Ti\u1ebfn" + "g Vi\u1ec7t"),
+          React.createElement("option", { value: "en" }, "English"),
+          React.createElement("option", { value: "zh" }, "\u4e2d\u6587"),
+          React.createElement("option", { value: "auto" }, weT("跟随 DSH（自动）")),
+        ),
+      ),
+    ),
     // ── 浏览方式：紧凑 CD 架 vs 常规分页网格 ──
     // 本节只有一条设置 ⇒ 不再套「节标题 + 一行」两层（#253）：外层 .we-picker__section 留作
     // 分隔线，行标签「紧凑布局」自己承担标题。

@@ -157,6 +157,11 @@ const setLinkEnabled = on => { linkEnabledFlag = on === true; persistLinkEnabled
 /** 当前语言 id：优先宿主 locale 服务快照，其次 `?we-lang` 逃生舱，回落 zh。 */
 const petLinkLang = () => {
   try {
+    const docLang = typeof document !== 'undefined' && document.documentElement && document.documentElement.dataset
+      ? document.documentElement.dataset.weLang : '';
+    if (typeof docLang === 'string' && docLang) return docLang;
+  } catch { /* ignore */ }
+  try {
     const loc = petLinkContext && typeof petLinkContext.get === 'function' ? petLinkContext.get('locale') : null;
     const snap = loc && (typeof loc.getSnapshot === 'function' ? loc.getSnapshot() : (typeof loc.snapshot === 'function' ? loc.snapshot() : null));
     const active = snap && (snap.active || snap.locale || snap.lang);

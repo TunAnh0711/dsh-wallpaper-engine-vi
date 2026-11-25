@@ -239,6 +239,9 @@ const DICT_MODULE = 'src/i18n/i18n-copy.js';
 const DICT_FAMILY = parseInlineModules().map(({ file }) => file)
   .filter((file) => /(?:^|\/)i18n-copy(?:-[^/]+)?\.js$/.test(file));
 const DICT_MODULES = new Set(DICT_FAMILY);
+const VI_DICT_FAMILY = parseInlineModules().map(({ file }) => file)
+  .filter((file) => /(?:^|\/)i18n-vi(?:-[^/]+)?\.js$/.test(file));
+const VI_DICT_MODULES = new Set(VI_DICT_FAMILY);
 // A3（多包，ADR-0014 S10.2）之后产品源码分居两处：主包 src/** 与 lib/**，子包 packages/<pkg>/{src,lib}/**。
 // 扫描面必须同源扩到 packages/**：否则迁出去的 weT(…) 调用点（如 packages/fx/src/ext-fx.js）
 // 与宿主「原句」出处（如 packages/fonts/lib/fontsets.js）双双掉出扫描面 —— 症状恰好是
@@ -259,7 +262,7 @@ const srcFiles = [join(ROOT, 'src'), ...subpackageDirs('src')].flatMap((d) => js
 const srcHits = [];
 for (const file of srcFiles) {
   const rel = relative(ROOT, file).split(/[\\/]/).join('/');
-  if (DICT_MODULES.has(rel)) continue;
+  if (DICT_MODULES.has(rel) || VI_DICT_MODULES.has(rel)) continue;
   if (rel === PETLINK_I18N_MODULE) continue; // pet-link 词表：中文即键，由 pet-link 词表对账留牙
   if (PETLINK_UI_FILES.includes(rel)) continue; // 这三个文件的文案走 pet-link 自成词表对账（见 ① 的 pet-link 段）
   for (const h of scanCjkStrings(readFileSync(file, 'utf8'))) srcHits.push({ file: rel, ...h });
@@ -622,6 +625,61 @@ console.log('⑥ 跟随契约（可选服务 / 不 park / 顶层订阅）');
     /label: \(\) => weT\(/.test(clientSrc) && /title: \(\) => weT\(/.test(readFileSync(join(ROOT, 'src', 'sidebar-right.js'), 'utf8')));
 }
 
+// ══ ⑦ 越南语词表完整度与运行期验证 ═════════════════════════════════════════════
+console.log('⑦ 越南语词表与运行期验证（VI 1-1 对账 + 切换）');
+{
+  const { api } = loadI18nRuntime();
+  const enAll = Object.keys(api.WE_I18N_EN);
+  const viAll = Object.keys(api.WE_I18N_VI);
+  const missingVi = enAll.filter((k) => !Object.prototype.hasOwnProperty.call(api.WE_I18N_VI, k));
+  const orphanVi = viAll.filter((k) => !Object.prototype.hasOwnProperty.call(api.WE_I18N_EN, k));
+  check('WE_I18N_VI 与 WE_I18N_EN 双向完全对齐',
+    missingVi.length === 0 && orphanVi.length === 0,
+    missingVi.length || orphanVi.length
+      ? '缺 ' + missingVi.length + ' / 多 ' + orphanVi.length : viAll.length + ' 条 1-1 对齐');
+
+  const enHost = Object.keys(api.WE_I18N_HOST_EN);
+  const viHost = Object.keys(api.WE_I18N_HOST_VI);
+  const missingHostVi = enHost.filter((k) => !Object.prototype.hasOwnProperty.call(api.WE_I18N_HOST_VI, k));
+  const orphanHostVi = viHost.filter((k) => !Object.prototype.hasOwnProperty.call(api.WE_I18N_HOST_EN, k));
+  check('WE_I18N_HOST_VI 与 WE_I18N_HOST_EN 双向完全对齐',
+    missingHostVi.length === 0 && orphanHostVi.length === 0,
+    missingHostVi.length || orphanHostVi.length
+      ? '缺 ' + missingHostVi.length + ' / 多 ' + orphanHostVi.length : viHost.length + ' 条 1-1 对齐');
+
+  const petLinkViDict = (() => {
+    try { return new Function(readFileSync(join(ROOT, 'packages/pet-link/src/pet-link/i18n.js'), 'utf8') + ';return PETLINK_I18N_VI;')(); }
+    catch { return {}; }
+  })();
+  const missingPlVi = Object.keys(petLinkDict).filter((k) => !Object.prototype.hasOwnProperty.call(petLinkViDict, k));
+  const orphanPlVi = Object.keys(petLinkViDict).filter((k) => !Object.prototype.hasOwnProperty.call(petLinkDict, k));
+  check('PETLINK_I18N_VI 与 PETLINK_I18N_EN 双向完全对齐',
+    missingPlVi.length === 0 && orphanPlVi.length === 0,
+    missingPlVi.length || orphanPlVi.length
+      ? '缺 ' + missingPlVi.length + ' / 多 ' + orphanPlVi.length : Object.keys(petLinkViDict).length + ' 条 1-1 对齐');
+
+  const phOf = (s) => [...String(s).matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort().join(',');
+  const badViEntries = [];
+  for (const [label, dict] of [['WE_I18N_VI', api.WE_I18N_VI], ['WE_I18N_HOST_VI', api.WE_I18N_HOST_VI], ['PETLINK_I18N_VI', petLinkViDict]]) {
+    for (const [k, v] of Object.entries(dict)) {
+      if (typeof v !== 'string' || !v.trim() || HAS_CJK_RE.test(v) || phOf(k) !== phOf(v)) {
+        badViEntries.push(label + ':' + k.slice(0, 30));
+      }
+    }
+  }
+  check('越南语词表值纪律（非空 / 无中文残留 / 占位符 100% 对齐）',
+    badViEntries.length === 0,
+    badViEntries.length ? badViEntries.slice(0, 5).join(' · ') : (viAll.length + viHost.length + Object.keys(petLinkViDict).length) + ' 条全部合规');
+
+  api.weSetUiLanguage('vi');
+  const viAuto = api.weT('自动检测');
+  check('运行期切换至 vi 生效', viAuto !== '自动检测' && viAuto !== 'Auto-detect' && !HAS_CJK_RE.test(viAuto), JSON.stringify(viAuto));
+  api.weSetUiLanguage('en');
+  check('运行期切换至 en 生效', api.weT('自动检测') === 'Auto-detect', JSON.stringify(api.weT('自动检测')));
+  api.weSetUiLanguage('zh');
+  check('运行期切换至 zh 生效', api.weT('自动检测') === '自动检测', JSON.stringify(api.weT('自动检测')));
+}
+
 console.log('\n' + (failed ? 'I18N CHECKS FAILED — ' + failed + ' failed' : 'I18N CHECKS PASSED')
   + ' (' + (passed + failed) + ')');
 process.exit(failed ? 1 : 0);
@@ -652,10 +710,10 @@ function loadI18nRuntime({ search = '', service = null } = {}) {
   // （共享实现：`test/tools/js-text.mjs` 的 stripExportBlocks —— 别在这里再抄一份正则）。
   // 装载顺序 = 族顺序（域模块在前、组装点在后），与构建期内联进同一工厂作用域时同形：
   // 组装点顶层读域常量，顺序反了会 TDZ 报错。
-  const code = DICT_FAMILY.map((rel) => stripExportBlocks(readFileSync(join(ROOT, rel), 'utf8'))).join('\n;\n')
+  const code = [...DICT_FAMILY, ...VI_DICT_FAMILY].map((rel) => stripExportBlocks(readFileSync(join(ROOT, rel), 'utf8'))).join('\n;\n')
     + '\n;\n' + stripExportBlocks(readFileSync(join(ROOT, 'src', 'i18n', 'i18n.js'), 'utf8'))
-    + '\n;\n({ weT, WE_I18N_EN, WE_I18N_HOST_EN, weI18nAttach, weLocaleSubscribe,'
-    + ' weLocaleRevisionValue, weOnLocaleChange, weLocaleId });\n';
+    + '\n;\n({ weT, WE_I18N_EN, WE_I18N_HOST_EN, WE_I18N_VI, WE_I18N_HOST_VI, weI18nAttach, weLocaleSubscribe,'
+    + ' weLocaleRevisionValue, weOnLocaleChange, weLocaleId, weSetUiLanguage });\n';
   const sandbox = {
     location: { search },
     URLSearchParams,

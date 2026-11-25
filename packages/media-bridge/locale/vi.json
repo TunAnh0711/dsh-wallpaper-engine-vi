@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Hình nền & Cầu nối media",
+    "description": "Các route cầu nối media hệ thống (đang phát / phổ âm thanh / ảnh bìa / điều khiển phát nhạc) kèm tiến trình media-bridge và cơ chế dự phòng."
+  }
+}

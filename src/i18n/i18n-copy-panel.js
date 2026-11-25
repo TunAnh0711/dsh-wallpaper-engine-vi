@@ -391,6 +391,12 @@ const WE_I18N_EN_PANEL = {
   "裁切失败": "Cropping failed",
   "读不出图片尺寸": "Could not read the image dimensions",
 
+  // ── 界面语言 ───────────────────────────────────────────────────────────────
+  "界面语言": "Interface language",
+  "立即生效 · 持久保存": "Applies immediately · Saved persistently",
+  "切换插件界面显示语言（默认越南语；选「跟随 DSH」时同步宿主语言）": "Switch the plugin UI language (Vietnamese by default; choose Follow DSH to sync with the host language)",
+  "跟随 DSH（自动）": "Follow DSH (Auto)",
+
 };
 
 export { WE_I18N_EN_PANEL };

@@ -1,0 +1,51 @@
+/**
+ * i18n-vi-pet-link.js — Vietnamese dictionary domain: official desktop pet link actions, bubbles & tuning copy.
+ * Pure data module, no imports/requires or top-level executable statements.
+ */
+const WE_I18N_VI_PET_LINK = {
+  "桌宠联动调参": "Tinh chỉnh liên kết thú cưng",
+  "走位时长（毫秒）": "Thời lượng di chuyển (ms)",
+  "准备时长（毫秒）": "Thời lượng chuẩn bị (ms)",
+  "侧栏展开（毫秒）": "Mở thanh bên (ms)",
+  "展开延迟（毫秒）": "Độ trễ mở (ms)",
+  "气泡时长（毫秒）": "Thời lượng bong bóng (ms)",
+  "等待关闭（毫秒）": "Chờ đóng (ms)",
+  "彩蛋触发次数": "Số lần kích hoạt trứng phục sinh",
+  "抓绳触发（毫秒）": "Thời điểm nắm dây (ms)",
+  "绳子下拉（像素）": "Quãng kéo dây xuống (px)",
+  "绳子释放（毫秒）": "Thời điểm thả dây (ms)",
+  "原生抛掷力度": "Lực ném nguyên bản",
+  "踢腿提前量（毫秒）": "Độ sớm đá chân (ms)",
+  "落地停留（毫秒）": "Dừng sau khi tiếp đất (ms)",
+  "哈气提前量（毫秒）": "Độ sớm khè (ms)",
+  "哈气展开进度（%）": "Tiến độ mở khi khè (%)",
+  "拉动侧边栏": "Kéo thanh bên",
+  "抓绳互动": "Tương tác nắm dây",
+  "踢开并弹飞": "Đá văng đi",
+  "站立哈气": "Đứng khè",
+  "联动可用": "Liên kết khả dụng",
+  "刷新桌宠": "Làm mới thú cưng",
+  "停止联动": "Dừng liên kết",
+  "关闭": "Đóng",
+  "目标桌宠": "Thú cưng mục tiêu",
+  "出现": "Xuất hiện",
+  "出现动作": "Hoạt ảnh xuất hiện",
+  "隐藏动作": "Hoạt ảnh ẩn",
+  "出现时间锚点": "Mốc thời gian xuất hiện",
+  "隐藏时间锚点": "Mốc thời gian ẩn",
+  "出现偏移（毫秒）": "Độ lệch xuất hiện (ms)",
+  "隐藏偏移（毫秒）": "Độ lệch ẩn (ms)",
+  "开始": "Bắt đầu",
+  "结束": "Kết thúc",
+  "运行当前逻辑": "Chạy chuỗi hiện tại",
+  "重置当前逻辑": "Đặt lại chuỗi hiện tại",
+  "导出 JSON": "Xuất JSON",
+  "当前调参 JSON": "JSON tinh chỉnh hiện tại",
+  "累死本鲸了，给我添两碗饭": "Mệt rã rời rồi, cho cá voi này thêm hai bát cơm đi!",
+  "可以换壁纸了，不要用××√哦": "Đổi hình nền được rồi đó, đừng dùng trò ××√ nha!",
+  "偶鲸鲸！！！": "Ôi cá voi ơi!!!",
+  "哇啊啊啊啊啊！！！": "Oaaaaaa!!!",
+  "？！欺负一只肥鱼！？": "?! Bắt nạt một con cá béo à?!"
+};
+
+export { WE_I18N_VI_PET_LINK };

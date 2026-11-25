@@ -165,6 +165,7 @@ const WE_I18N_EN_EXT = {
   "🛠️ YV3507 —— 提交量最大的贡献者：从早期场景渲染器起步，到静态帧系列修复、液态玻璃令牌体系、实时帧链路与多轮大型重构，几乎每个里程碑都有他": "🛠️ YV3507 — the most prolific contributor: from the early scene renderer to the static-frame fixes, the liquid-glass token system, the live-frame pipeline and several large refactors — he is in almost every milestone",
   "🎨 yuxilao —— scene-gl 的 Linux 实时渲染管线（WebGL2 官方 shader 驱动）、轮换交接与 GPU 帧回填": "🎨 yuxilao — the Linux live-rendering pipeline of scene-gl (WebGL2 driven by the official shaders), rotation hand-off and GPU frame back-fill",
   "🍎 Jerry —— 在三平台原生支持落地之前，macOS 侧的适配与贡献路径由他维护": "🍎 Jerry — before native support landed on all three platforms, he maintained the macOS port and the macOS contribution path",
+  "🇻🇳 TunAnh0711 —— 完整越南语本地化版本（支持越南语 / 英语 / 中文多语言切换）的作者与维护者": "🇻🇳 TunAnh0711 — author and maintainer of the full Vietnamese localization edition (with Vietnamese / English / Chinese switching)",
   "🌟 还有 SiriLee、libiwolve、0-007pro、jujubaoj646-star、xiahou001、wilianyichen、hecoococ、ShamSky88、Rekk0、Y1X1n 等贡献者，以及所有通过 issue 反馈与 PR 参与改进的朋友 —— 谢谢你们！": "🌟 And SiriLee, libiwolve, 0-007pro, jujubaoj646-star, xiahou001, wilianyichen, hecoococ, ShamSky88, Rekk0, Y1X1n and many more, plus everyone who filed an issue or sent a PR — thank you!",
   "也谢谢上游 Wallpaper Engine 生态与 DSH 官方插件的作者们 —— 站在你们的肩膀上。🙇": "Thanks as well to the Wallpaper Engine ecosystem and the authors of the official DSH plugins — we are standing on your shoulders. 🙇",
   "⭐ 开源与支持": "⭐ Open source & support",
@@ -183,6 +184,9 @@ const WE_I18N_EN_EXT = {
   "这次没能连上 GitHub，显示的是上一次取到的一次值（不是实时数）": "GitHub could not be reached just now — showing the last value that was fetched (not live data)",
   "🔗 仓库地址（按钮打不开时可手动复制）：": "🔗 Repository URL (copy it manually if the button does nothing):",
   "想要新功能、遇到问题，或者想看看接下来要做什么，都欢迎来仓库提 Issue / PR —— 一起把它做得更好 🧰": "Want a new feature, hit a problem, or curious what is next? File an Issue / PR in the repo — let's make it better together. 🧰",
+  "☕ 感谢支持 · 越南语版作者（TunAnh0711）": "☕ Support the Vietnamese Edition Author (TunAnh0711)",
+  "越南语版作者赞赏二维码": "Vietnamese edition author donation QR code",
+  "MB Bank · TRAN DANG TUAN ANH · 320382 · 随心支持，开源免费 ❤️": "MB Bank · TRAN DANG TUAN ANH · 320382 · Optional support, free & open source ❤️",
   "💬 加入交流群": "💬 Join the community",
   "卡住了、想吐槽、或者想第一时间拿到新版本，都欢迎来群里找我们 👋": "Stuck, want to vent, or want new versions the moment they land? Come find us in the groups. 👋",
   "🐧 QQ 群 · DSHWE | LLM 讨论群": "🐧 QQ group · DSHWE | LLM discussion",
@@ -196,7 +200,7 @@ const WE_I18N_EN_EXT = {
   // 本区段是**纯公告文案词条**：CI 的 `notice` 快通道只在这一段内放行"只改字符串内容"
   // 的提交（判据见 test/tools/ci-routing.mjs 的 judgeNoticeEdit：区块外逐字节一致 +
   // 区块内代码骨架一致）。增删键 = 改结构 ⇒ 骨架变 ⇒ 回落全量验证链。
-  "🎉 更新：图片幻灯片壁纸 · 桌宠联动重写 · 玻璃更稳": "🎉 Update: picture & slideshow wallpapers · pet-link rewrite · steadier glass",
+  "🎉 更新：图片幻灯片壁纸 · 桌宠联动重写 · 玻璃更稳": "🎉 Update: picture & slideshow wallpapers · pet-link rewrite · steadier glass · Vietnamese Edition by @07th_11",
   "关掉也能再看": "You can always read it again",
   "：本公告点「知道了」后不再自动弹出，想回顾就到「设置 → 壁纸引擎 → 关于」点「重新查看本版更新公告」。": ": after you dismiss this notice it won't pop up again — to read it later, open Settings → Wallpaper Engine → About and click “Show this version's update notice again”.",
   "图片 / 幻灯片壁纸": "Picture / slideshow wallpapers",

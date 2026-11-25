@@ -142,6 +142,139 @@ const PETLINK_I18N_EN = {
   '联动服务未就绪，详见安装说明': 'Link service not ready yet; see the install guide',
 };
 
+const PETLINK_I18N_VI = {
+  'pet 下落时长（毫秒）': 'Thời lượng thú cưng rơi (ms)',
+  'pet 下落距离（像素，0 关闭）': 'Quãng rơi của thú cưng (px, 0 = tắt)',
+  '■ 停止': '■ Dừng',
+  '▶ 运行 ': '▶ Chạy ',
+  '下拉缓动': 'Đường cong kéo xuống',
+  '侧栏展开延迟（毫秒）': 'Độ trễ mở thanh bên (ms)',
+  '侧栏展开时长（毫秒）': 'Thời lượng mở thanh bên (ms)',
+  '侧栏展开缓动': 'Đường cong mở thanh bên',
+  '侧栏开始展开进度（%）': 'Tiến độ bắt đầu mở thanh bên (%)',
+  '侧栏触发时刻（毫秒）': 'Thời điểm kích hoạt thanh bên (ms)',
+  '保持默认': 'Giữ mặc định',
+  '偏移（毫秒）': 'Độ lệch (ms)',
+  '全屏抖动与展开': 'Rung toàn màn hình & mở rộng',
+  '全屏抖动强度（像素，0 关闭）': 'Cường độ rung toàn màn hình (px, 0 = tắt)',
+  '关闭面板': 'Đóng bảng',
+  '出现': 'Xuất hiện',
+  '动作节点': 'Mốc hành động',
+  '动作间隔（毫秒）': 'Khoảng cách hành động (ms)',
+  '匀速': 'Đều (Linear)',
+  '占用续期间隔（毫秒）': 'Chu kỳ gia hạn chiếm dụng (ms)',
+  '原生抛掷力度倍数': 'Hệ số lực ném nguyên bản',
+  '去程时长（毫秒，0 自动）': 'Thời lượng lượt đi (ms, 0 = tự động)',
+  '去程走路时长（毫秒）': 'Thời lượng đi bộ lượt đi (ms)',
+  '右手横向位置（比例）': 'Vị trí ngang tay phải (tỷ lệ)',
+  '后拉动画时长（毫秒）': 'Thời lượng hoạt ảnh kéo lùi (ms)',
+  '后拉提前展开（毫秒）': 'Mở sớm trước khi kéo lùi (ms)',
+  '后退跟随（逻辑一）': 'Lùi theo (Logic 1)',
+  '向左弹飞强度（参考像素）': 'Lực văng sang trái (px tham chiếu)',
+  '启用桌宠联动': 'Bật liên kết thú cưng',
+  '哈气前等待（毫秒）': 'Chờ trước khi khè (ms)',
+  '哈气动作时长（毫秒）': 'Thời lượng hoạt ảnh khè (ms)',
+  '导入 JSON': 'Nhập JSON',
+  '导入失败：JSON 结构不正确': 'Nhập thất bại: cấu trúc JSON không hợp lệ',
+  '导出 JSON': 'Xuất JSON',
+  '已停止': 'Đã dừng',
+  '已安装': 'Đã cài đặt',
+  '已完成': 'Đã hoàn tất',
+  '已导入 JSON': 'Đã nhập JSON',
+  '已导出 JSON': 'Đã xuất JSON',
+  '开始': 'Bắt đầu',
+  '开始或结束': 'Bắt đầu hoặc kết thúc',
+  '弹回缓动': 'Đường cong bật lại',
+  '弹飞位移': 'Quãng văng đi',
+  '弹飞发力时间（毫秒）': 'Thời điểm phát lực văng (ms)',
+  '弹飞启动延迟（毫秒）': 'Độ trễ bắt đầu văng (ms)',
+  '实测可视边界': 'Biên hiển thị thực đo',
+  '抓绳站位头顶偏移（像素）': 'Độ lệch đỉnh đầu khi đứng nắm dây (px)',
+  '待测量（运行一次后显示）': 'chưa đo (chạy một lần để hiển thị)',
+  '当前回落原生吉祥物（native）': 'Đang dùng linh vật nguyên bản (native)',
+  '当前调参 JSON': 'JSON tinh chỉnh hiện tại',
+  '当前逻辑': 'Logic hiện tại',
+  '彩蛋一': 'Trứng phục sinh 1',
+  '彩蛋一 · 踢开并弹飞': 'Trứng phục sinh 1 · Đá văng đi',
+  '彩蛋与返回原位': 'Trứng phục sinh & quay về vị trí cũ',
+  '彩蛋二': 'Trứng phục sinh 2',
+  '彩蛋二 · 站立哈气': 'Trứng phục sinh 2 · Đứng khè',
+  '彩蛋触发次数（次）': 'Số lần kích hoạt trứng phục sinh (lần)',
+  '手与侧栏间距（像素）': 'Khoảng cách tay và thanh bên (px)',
+  '打开操控面板': 'Mở bảng điều khiển',
+  '打开操控面板（Ctrl+Shift+D）': 'Mở bảng điều khiển (Ctrl+Shift+D)',
+  '把壁纸吉祥物换成可联动的桌宠，或回到原生吉祥物': 'Đổi linh vật hình nền sang thú cưng có thể liên kết, hoặc quay về linh vật nguyên bản',
+  '抓住绳子时刻（毫秒）': 'Thời điểm nắm dây (ms)',
+  '抓绳互动': 'Tương tác nắm dây',
+  '抖动开始时刻（毫秒）': 'Thời điểm bắt đầu rung (ms)',
+  '抖动频率（次/秒）': 'Tần số rung (lần/giây)',
+  '拉动侧边栏': 'Kéo thanh bên',
+  '按显示时长': 'Theo thời lượng hiển thị',
+  '最大跟随速度（像素/秒）': 'Tốc độ theo tối đa (px/giây)',
+  '未安装': 'Chưa cài đặt',
+  '桌宠联动': 'Liên kết thú cưng',
+  '桌宠联动调参': 'Tinh chỉnh liên kết thú cưng',
+  '检测到官方 dsh-pet：两者会各显示一只，互不接管。': 'Phát hiện dsh-pet chính thức: mỗi bên sẽ hiển thị một thú cưng riêng, không chiếm quyền của nhau.',
+  '正在检测运行时…': 'Đang phát hiện runtime…',
+  '气泡': 'Bong bóng',
+  '气泡放行窗口（毫秒）': 'Cửa sổ cho phép bong bóng (ms)',
+  '气泡时间节点': 'Mốc thời gian bong bóng',
+  '气泡显示时长（毫秒）': 'Thời lượng hiển thị bong bóng (ms)',
+  '测试一次联动': 'Thử liên kết một lần',
+  '站立哈气': 'Đứng khè',
+  '等待关闭上限（毫秒）': 'Giới hạn chờ đóng (ms)',
+  '结束': 'Kết thúc',
+  '绳子下拉距离（像素）': 'Quãng kéo dây xuống (px)',
+  '绳子位移': 'Dịch chuyển dây',
+  '绳子弹回时长（毫秒）': 'Thời lượng dây bật lại (ms)',
+  '绳子拉下时长（毫秒）': 'Thời lượng kéo dây xuống (ms)',
+  '缓入缓出': 'Chậm hai đầu (Ease in-out)',
+  '缓出': 'Chậm cuối (Ease out)',
+  '联动占用': 'Chiếm dụng liên kết',
+  '联动可用': 'Liên kết khả dụng',
+  '联动已就绪（linked）': 'Liên kết đã sẵn sàng (linked)',
+  '联动暂不可用': 'Liên kết tạm không khả dụng',
+  '脱手与下落': 'Buông tay & rơi xuống',
+  '脱手时刻（毫秒）': 'Thời điểm buông tay (ms)',
+  '落地动作时长（毫秒）': 'Thời lượng hoạt ảnh tiếp đất (ms)',
+  '落地后停留时长（毫秒）': 'Thời lượng dừng sau khi tiếp đất (ms)',
+  '落地恢复': 'Hồi phục sau khi tiếp đất',
+  '被弹飞动作时长（毫秒）': 'Thời lượng hoạt ảnh bị văng (ms)',
+  '诊断': 'Chẩn đoán',
+  '走路返回最小距离（像素）': 'Khoảng cách tối thiểu để đi bộ về (px)',
+  '跟随起步宽限（毫秒）': 'Độ trễ khởi động theo sau (ms)',
+  '跳抓动作时长（毫秒）': 'Thời lượng hoạt ảnh nhảy nắm (ms)',
+  '踢开并弹飞': 'Đá văng đi',
+  '踢腿与侧栏间距（像素）': 'Khoảng cách chân đá và thanh bên (px)',
+  '踢腿前等待（毫秒）': 'Chờ trước khi đá (ms)',
+  '踢腿动作时长（毫秒）': 'Thời lượng hoạt ảnh đá (ms)',
+  '运行中': 'Đang chạy',
+  '逻辑一': 'Logic 1',
+  '逻辑一 · 侧栏拉动': 'Logic 1 · Kéo thanh bên',
+  '逻辑二': 'Logic 2',
+  '重置当前逻辑': 'Đặt lại logic hiện tại',
+  '隐藏': 'Ẩn',
+  '静止位移阈值（像素）': 'Ngưỡng dịch chuyển đứng yên (px)',
+  '静止确认时长（毫秒）': 'Thời lượng xác nhận đứng yên (ms)',
+  '预备到后拉间隔（毫秒）': 'Khoảng cách từ chuẩn bị đến kéo lùi (ms)',
+  '（原生吉祥物）': '(linh vật nguyên bản)',
+  '运行时版本过旧（需升级 dshpet-dshwe）': 'Phiên bản runtime quá cũ (cần nâng cấp dshpet-dshwe)',
+  '收起安装说明': 'Thu gọn hướng dẫn cài đặt',
+  '如何下载安装联动桌宠': 'Cách tải và cài đặt thú cưng liên kết',
+  '① 左侧栏点「插件」': '① Bấm «Tiện ích» ở thanh bên trái',
+  '② 右上角点「+ 添加插件」': '② Bấm «+ Thêm tiện ích» ở góc trên bên phải',
+  '③ 输入包名后点「安装」': '③ Nhập tên gói rồi bấm «Cài đặt»',
+  '三步装好联动桌宠': 'Ba bước cài đặt thú cưng liên kết',
+  '复制包名': 'Sao chép tên gói',
+  '已复制': 'Đã sao chép',
+  '安装时请复制上面的包名粘贴进去；也可在 npm 页面手动下载。': 'Khi cài đặt, hãy sao chép tên gói ở trên rồi dán vào; bạn cũng có thể tải thủ công trên trang npm.',
+  '截图加载中…': 'Đang tải ảnh chụp màn hình…',
+  '独立改编版 · 不跟随上游更新（点开安装说明查看）': 'Bản chỉnh sửa độc lập · không theo cập nhật thượng nguồn (mở hướng dẫn cài đặt để xem)',
+  '关于 dshpet-dshwe：它基于上游 dsh-pet 的一次快照改编，由社区单独维护，不承诺跟随上游更新。本插件按 link 协议版本适配；该包过旧或未同步时会回落为原生吉祥物，升级 dshpet-dshwe 即可恢复。': 'Về dshpet-dshwe: đây là bản chỉnh sửa dựa trên một bản chụp của dsh-pet thượng nguồn, do cộng đồng tự duy trì và không cam kết theo sát cập nhật thượng nguồn. Tiện ích này tương thích theo phiên bản giao thức link; nếu gói quá cũ hoặc chưa đồng bộ, hệ thống sẽ quay về linh vật nguyên bản — nâng cấp dshpet-dshwe để khôi phục.',
+  '该联动包可能落后于本插件，详见安装说明': 'Gói liên kết này có thể cũ hơn tiện ích hiện tại, xem hướng dẫn cài đặt',
+  '联动服务未就绪，详见安装说明': 'Dịch vụ liên kết chưa sẵn sàng, xem hướng dẫn cài đặt',
+};
+
 /** `{name}` 占位符插值（与主包 weT 同口径的子集）。 */
 function petLinkInterpolate(text, params) {
   if (!params || typeof text !== 'string') return text;
@@ -149,9 +282,9 @@ function petLinkInterpolate(text, params) {
 }
 
 /**
- * 造注入式 translator：**先查 pet-link 本地 EN 表，再回落主包 weT**。
+ * 造注入式 translator：**先查 pet-link 本地 VI/EN 表，再回落主包 weT**。
  * @param hostWeT - 主包 `weT`（中文/其它语言的真源）。
- * @param langOf - 取当前语言 id 的函数（`zh*` = 中文，其余走本地 EN 表）。
+ * @param langOf - 取当前语言 id 的函数（`vi*` = 越南语，`zh*` = 中文，其余走本地 EN 表）。
  * @returns `(key, params) => string`
  */
 function createPetLinkTranslate(hostWeT, langOf) {
@@ -160,7 +293,10 @@ function createPetLinkTranslate(hostWeT, langOf) {
     if (typeof key !== 'string' || key === '') return key;
     let lang = 'zh';
     try { lang = (typeof langOf === 'function' ? langOf() : '') || 'zh'; } catch { lang = 'zh'; }
-    if (!/^zh/i.test(String(lang))) {
+    if (/^vi/i.test(String(lang))) {
+      const vi = Object.prototype.hasOwnProperty.call(PETLINK_I18N_VI, key) ? PETLINK_I18N_VI[key] : undefined;
+      if (typeof vi === 'string') return petLinkInterpolate(vi, params);
+    } else if (!/^zh/i.test(String(lang))) {
       const en = Object.prototype.hasOwnProperty.call(PETLINK_I18N_EN, key) ? PETLINK_I18N_EN[key] : undefined;
       if (typeof en === 'string') return petLinkInterpolate(en, params);
     }

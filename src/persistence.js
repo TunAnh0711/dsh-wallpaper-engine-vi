@@ -326,6 +326,7 @@ async function loadPersisted() {
   // Settings applied (host or fallback). Mark loaded so gated UI — the one-time
   // notice — knows the persisted noticeSeen is final before it renders.
   selection.hostLoaded = true;
+  if (typeof weSetUiLanguage === "function") weSetUiLanguage(selection.uiLanguage);
   applyEffects();
   emit();
 }

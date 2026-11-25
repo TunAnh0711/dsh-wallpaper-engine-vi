@@ -382,6 +382,7 @@ function weComponentVisibleOf(components, name) {
       weT("🛠️ YV3507 —— 提交量最大的贡献者：从早期场景渲染器起步，到静态帧系列修复、液态玻璃令牌体系、实时帧链路与多轮大型重构，几乎每个里程碑都有他"),
       weT("🎨 yuxilao —— scene-gl 的 Linux 实时渲染管线（WebGL2 官方 shader 驱动）、轮换交接与 GPU 帧回填"),
       weT("🍎 Jerry —— 在三平台原生支持落地之前，macOS 侧的适配与贡献路径由他维护"),
+      weT("🇻🇳 TunAnh0711 —— 完整越南语本地化版本（支持越南语 / 英语 / 中文多语言切换）的作者与维护者"),
       weT("🌟 还有 SiriLee、libiwolve、0-007pro、jujubaoj646-star、xiahou001、wilianyichen、hecoococ、ShamSky88、Rekk0、Y1X1n 等贡献者，以及所有通过 issue 反馈与 PR 参与改进的朋友 —— 谢谢你们！"),
     ];
     return React.createElement(React.Fragment, null,
@@ -441,6 +442,18 @@ function weComponentVisibleOf(components, name) {
         }, weT("重新查看本版更新公告")),
         React.createElement("p", { className: "we-about__p" },
           weT("想要新功能、遇到问题，或者想看看接下来要做什么，都欢迎来仓库提 Issue / PR —— 一起把它做得更好 🧰")),
+        React.createElement("div", { className: "we-about__qr-row" },
+          React.createElement("figure", { className: "we-about__qr" },
+            React.createElement("figcaption", { className: "we-about__qr-title" }, weT("☕ 感谢支持 · 越南语版作者（TunAnh0711）")),
+            React.createElement("img", {
+              className: "we-about__qr-img",
+              src: apiUrl(ABOUT_QR_DONATE_PATH),
+              alt: weT("越南语版作者赞赏二维码"),
+              draggable: false,
+            }),
+            React.createElement("figcaption", { className: "we-about__qr-hint" }, weT("MB Bank · TRAN DANG TUAN ANH · 320382 · 随心支持，开源免费 ❤️")),
+          ),
+        ),
       ),
       // ── ③ 交流群（两张二维码）──
       React.createElement("div", { className: "we-picker__section" },

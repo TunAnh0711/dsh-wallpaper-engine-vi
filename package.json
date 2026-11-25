@@ -12,7 +12,7 @@
   "icon": "./icon.png",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elysia395/dsh-wallpaper-engine.git"
+    "url": "git+https://github.com/TunAnh0711/dsh-wallpaper-engine-vi.git"
   },
   "keywords": [
     "dsh",
@@ -140,10 +140,12 @@
     "assets/about/sponsor-fish.png",
     "assets/readme/mascot-eating-rice-1280x1784.jpg",
     "README.md",
+    "README.zh.md",
     "README.en.md",
     "README.beginner.md",
     "plugin-detail.zh.md",
     "plugin-detail.en.md",
+    "plugin-detail.vi.md",
     "locale/"
   ],
   "dsh": {

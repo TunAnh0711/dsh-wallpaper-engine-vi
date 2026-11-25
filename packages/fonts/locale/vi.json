@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Hệ thống phông chữ",
+    "description": "Toàn bộ hệ thống phông chữ: mục \"Phông chữ toàn cục\" trong tab Giao diện, trình chỉnh sửa bộ phông chữ và các route host /fontsets, /system-fonts."
+  }
+}

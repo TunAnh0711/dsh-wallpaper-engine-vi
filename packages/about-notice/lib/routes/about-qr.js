@@ -33,7 +33,7 @@ import { resolve, relative, isAbsolute } from 'node:path';
  * 名字用 `String` 的精确比较（`===`），不看前缀/后缀 —— 于是 `qq-group.png.bak`、
  * `./qq-group.png`、`qq-group.png/` 之类都过不了。
  */
-const ABOUT_QR_FILES = ['qq-group.png', 'douyin-group.png', 'update-notice.jpg'];
+const ABOUT_QR_FILES = ['qq-group.png', 'douyin-group.png', 'donate-vi.jpg', 'update-notice.jpg'];
 
 /**
  * 命中白名单返回绝对路径（含目录包含性复查），否则 null。
